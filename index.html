@@ -23,6 +23,9 @@
       --light: #ddd6fe;
       --sidebar-width: 280px;
       --header-height: 70px;
+      --recipe-primary: #10ac84;
+      --recipe-secondary: #ee5a24;
+      --recipe-accent: #feca57;
     }
 
     body {
@@ -32,7 +35,7 @@
       padding: 0;
     }
 
-    /* Header - FIXED */
+    /* Header - EXACT COPY FROM ORIGINAL */
     .main-header {
       position: fixed;
       top: 0;
@@ -112,7 +115,6 @@
       margin: 0 20px;
     }
 
-    /* Search Bar */
     .search-container {
       position: relative;
       width: 100%;
@@ -168,7 +170,6 @@
       opacity: 1;
     }
 
-    /* Header Right Section */
     .header-right {
       display: flex;
       align-items: center;
@@ -214,7 +215,6 @@
       font-weight: 600;
     }
 
-    /* Profile Dropdown in Header */
     .profile-section {
       position: relative;
       margin-left: 8px;
@@ -328,7 +328,7 @@
       font-size: 16px;
     }
 
-    /* Sidebar */
+    /* Sidebar - EXACT COPY FROM ORIGINAL */
     .sidebar {
       position: fixed;
       top: var(--header-height);
@@ -1347,7 +1347,7 @@
       <!-- Header Left -->
       <div class="header-left">
         <!-- Sidebar Toggle -->
-        <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
           <i class="bi bi-list"></i>
         </button>
         
@@ -1363,9 +1363,9 @@
       <!-- Header Center - Search Bar -->
       <div class="header-center">
         <div class="search-container">
-          <input type="text" class="search-input" placeholder="Caută antrenamente, exerciții..." id="searchInput">
+          <input type="text" class="search-input" placeholder="Caută rețete, ingrediente..." id="searchInput" aria-label="Search">
           <i class="bi bi-search search-icon"></i>
-          <button class="search-clear" onclick="clearSearch()">
+          <button class="search-clear" onclick="clearSearch()" aria-label="Clear search">
             <i class="bi bi-x"></i>
           </button>
         </div>
@@ -1374,17 +1374,17 @@
       <!-- Header Right Section -->
       <div class="header-right">
         <!-- Quick Access Buttons -->
-        <button class="header-btn" title="Notificări" onclick="showNotifications()">
+        <button class="header-btn" title="Notificări" onclick="showNotifications()" aria-label="Notifications">
           <i class="bi bi-bell"></i>
           <span class="notification-badge">3</span>
         </button>
         
-        <button class="header-btn d-none d-md-flex" title="Mesaje" onclick="showMessages()">
+        <button class="header-btn d-none d-md-flex" title="Mesaje" onclick="showMessages()" aria-label="Messages">
           <i class="bi bi-chat-dots"></i>
           <span class="notification-badge">5</span>
         </button>
         
-        <button class="header-btn d-none d-lg-flex" title="Setări rapide" onclick="showSettings()">
+        <button class="header-btn d-none d-lg-flex" title="Setări rapide" onclick="showSettings()" aria-label="Quick Settings">
           <i class="bi bi-gear"></i>
         </button>
         
@@ -1469,34 +1469,28 @@
       <div class="sidebar-section">
         <div class="sidebar-title">Navigare Principală</div>
         
-        <a href="#" class="sidebar-item active">
+        <a href="#" class="sidebar-item">
           <i class="bi bi-house-fill"></i>
           Dashboard
         </a>
         
-        <a href="#" class="sidebar-item">
+        <a href="antrenamente_list.html" class="sidebar-item active">
           <i class="bi bi-lightning-charge"></i>
           Antrenamente
           <span class="badge">12</span>
         </a>
         
-        <a href="#" class="sidebar-item">
-          <i class="bi bi-graph-up-arrow"></i>
-          Progresul Meu
-        </a>
-        
-        <a href="#" class="sidebar-item">
-          <i class="bi bi-calendar-event"></i>
-          Program
-        </a>
-        
-        <a href="#" class="sidebar-item">
+
+        <a href="retete_list.html" class="sidebar-item">
           <i class="bi bi-apple"></i>
           Nutriție
           <span class="badge">New</span>
         </a>
+        <a href="suplimente.html" class="sidebar-item active">
+          <i class="bi bi-capsule"></i>
+          Suplimente
+        </a>
       </div>
-      
     </div>
   </aside>
 
@@ -2565,32 +2559,32 @@
     });
 
     // Initialize sidebar items click handlers
-    document.addEventListener('DOMContentLoaded', function() {
-      // Add click handlers for sidebar items
-      const sidebarItems = document.querySelectorAll('.sidebar-item');
-      sidebarItems.forEach(item => {
-        item.addEventListener('click', function(e) {
-          e.preventDefault();
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   // Add click handlers for sidebar items
+    //   const sidebarItems = document.querySelectorAll('.sidebar-item');
+    //   sidebarItems.forEach(item => {
+    //     item.addEventListener('click', function(e) {
+    //       e.preventDefault();
           
-          // Remove active class from all items
-          sidebarItems.forEach(i => i.classList.remove('active'));
+    //       // Remove active class from all items
+    //       sidebarItems.forEach(i => i.classList.remove('active'));
           
-          // Add active class to clicked item
-          this.classList.add('active');
+    //       // Add active class to clicked item
+    //       this.classList.add('active');
           
-          // Show notification based on clicked item
-          const itemText = this.textContent.trim();
-          showNotification(`Navigare către: ${itemText}`);
+    //       // Show notification based on clicked item
+    //       const itemText = this.textContent.trim();
+    //       showNotification(`Navigare către: ${itemText}`);
           
-          // Close sidebar on mobile after selection
-          if (window.innerWidth <= 992) {
-            setTimeout(() => {
-              closeSidebar();
-            }, 300);
-          }
-        });
-      });
-    });
+    //       // Close sidebar on mobile after selection
+    //       if (window.innerWidth <= 992) {
+    //         setTimeout(() => {
+    //           closeSidebar();
+    //         }, 300);
+    //       }
+    //     });
+    //   });
+    // });
 
     // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {

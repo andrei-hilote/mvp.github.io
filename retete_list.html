@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitFlow - Lista Rețetelor Mele</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #764ba2;
+      --secondary: #ff7675;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --info: #74b9ff;
+      --danger: #e17055;
+      --dark: #2d3436;
+      --light: #ddd6fe;
+      --sidebar-width: 280px;
+      --header-height: 70px;
+      --recipe-primary: #10ac84;
+      --recipe-secondary: #ee5a24;
+      --recipe-accent: #feca57;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header - EXACT COPY FROM ORIGINAL */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: white;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1030;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      max-width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #6c757d;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-right: 16px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: var(--primary);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-center {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 20px;
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      padding: 0 45px 0 40px;
+      border: 2px solid #e9ecef;
+      border-radius: 21px;
+      background: #f8f9fa;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c757d;
+      font-size: 16px;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-input:not(:placeholder-shown) + .search-icon + .search-clear {
+      opacity: 1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: #f8f9fa;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .header-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 18px;
+      height: 18px;
+      background: var(--danger);
+      border-radius: 50%;
+      font-size: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .profile-section {
+      position: relative;
+      margin-left: 8px;
+    }
+
+    .profile-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+    }
+
+    .profile-trigger:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: inherit;
+    }
+
+    .profile-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-status {
+      font-size: 11px;
+      color: #6c757d;
+      line-height: 1;
+      margin: 2px 0 0 0;
+      white-space: nowrap;
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      padding: 16px 0;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1050;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 8px;
+    }
+
+    .dropdown-item-custom {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-item-custom:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .dropdown-item-custom i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    /* Sidebar - EXACT COPY FROM ORIGINAL */
+    .sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      background: white;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      z-index: 1020;
+      transition: all 0.3s ease;
+      transform: translateX(0);
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-content {
+      padding: 24px 0;
+    }
+
+    .sidebar-section {
+      margin-bottom: 32px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-bottom: 12px;
+      padding: 0 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      color: #495057;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sidebar-item:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .sidebar-item.active {
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), transparent);
+      color: var(--primary);
+      border-right: 3px solid var(--primary);
+    }
+
+    .sidebar-item i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .sidebar-item .badge {
+      margin-left: auto;
+      background: var(--primary);
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      margin-top: var(--header-height);
+      padding: 24px;
+      transition: all 0.3s ease;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1010;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Recipes List */
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .recipe-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .recipe-content {
+      padding: 1.5rem;
+    }
+
+    .recipe-category {
+      background: rgba(16, 172, 132, 0.1);
+      color: var(--recipe-primary);
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+      display: inline-block;
+    }
+
+    .recipe-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+
+    .recipe-description {
+      color: #6c757d;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .recipe-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+    }
+
+    .recipe-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .recipe-meta i {
+      color: var(--recipe-primary);
+    }
+
+    .recipe-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .recipe-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: #ffc107;
+      font-weight: 600;
+    }
+
+    .recipe-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .btn-recipe {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .btn-primary-recipe {
+      background: var(--recipe-primary);
+      color: white;
+    }
+
+    .btn-primary-recipe:hover {
+      background: #00a085;
+      color: white;
+    }
+
+    .btn-outline-recipe {
+      background: transparent;
+      border: 1px solid #dee2e6;
+      color: #6c757d;
+    }
+
+    .btn-outline-recipe:hover {
+      background: #f8f9fa;
+      color: var(--recipe-primary);
+      border-color: var(--recipe-primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 1021;
+      }
+      
+      .sidebar.show {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .profile-info {
+        display: none;
+      }
+      
+      .recipes-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-logo span {
+        display: none;
+      }
+      
+      .header-center {
+        max-width: 200px;
+        margin: 0 12px;
+      }
+      
+      .main-content {
+        padding: 16px;
+      }
+      
+      .recipes-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-content {
+        padding: 0 12px;
+      }
+      
+      .search-input {
+        height: 38px;
+        font-size: 13px;
+      }
+      
+      .header-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      .sidebar-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+      
+      .profile-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+      }
+    }
+    .recipe-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.recipe-card-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  text-decoration: none;
+  color: inherit;
+}
+
+/* General hover effects for recipe cards */
+.recipe-card {
+  transition: all 0.3s ease;
+}
+
+.recipe-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+/* Favorite button styling */
+.btn-recipe.favorited {
+  background-color: #ff6b6b;
+  color: white;
+  border-color: #ff6b6b;
+}
+
+.btn-recipe.favorited:hover {
+  background-color: #ff5252;
+  border-color: #ff5252;
+}
+
+/* Heart icon animation */
+.btn-recipe i {
+  transition: all 0.2s ease;
+}
+
+/* Rating hover effect */
+.recipe-rating:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+        
+        <a href="#" class="brand-logo">
+          <div class="brand-icon">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <span>FitFlow</span>
+        </a>
+      </div>
+      
+      <div class="header-center">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Caută rețete..." id="searchInput">
+          <i class="bi bi-search search-icon"></i>
+          <button class="search-clear" onclick="clearSearch()">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <button class="header-btn" onclick="showNotifications()">
+          <i class="bi bi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        
+        <button class="header-btn d-none d-md-flex">
+          <i class="bi bi-chat-dots"></i>
+          <span class="notification-badge">5</span>
+        </button>
+        
+        <button class="header-btn d-none d-lg-flex">
+          <i class="bi bi-gear"></i>
+        </button>
+        
+        <div class="profile-section">
+          <div class="profile-trigger" onclick="toggleProfileDropdown()">
+            <div class="profile-avatar">MC</div>
+            <div class="profile-info d-none d-md-block">
+              <div class="profile-name">Maria Cristina</div>
+              <div class="profile-status">Online</div>
+            </div>
+            <i class="bi bi-chevron-down d-none d-md-inline ms-1"></i>
+          </div>
+          
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+              <div class="d-flex align-items-center">
+                <div class="profile-avatar me-3" style="width: 50px; height: 50px; font-size: 16px;">MC</div>
+                <div>
+                  <h6 class="mb-1">Maria Cristina</h6>
+                  <small class="text-muted">maria.cristina@email.com</small>
+                  <br>
+                  <small class="badge bg-primary">Premium Member</small>
+                </div>
+              </div>
+            </div>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-person-circle"></i>
+              Profilul Meu
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-graph-up-arrow"></i>
+              Statistici & Progres
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-trophy"></i>
+              Realizări & Insigna
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-heart-pulse"></i>
+              Monitorizare Sănătate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-gear"></i>
+              Setări Cont
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-question-circle"></i>
+              Ajutor & Suport
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-shield-check"></i>
+              Securitate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom text-danger">
+              <i class="bi bi-box-arrow-right"></i>
+              Deconectare
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Navigare Principală</div>
+        
+        <a href="#" class="sidebar-item">
+          <i class="bi bi-house-fill"></i>
+          Dashboard
+        </a>
+        
+        <a href="antrenamente_list.html" class="sidebar-item">
+          <i class="bi bi-lightning-charge"></i>
+          Antrenamente
+          <span class="badge">12</span>
+        </a>
+        
+        <a href="retete_list.html" class="sidebar-item active">
+          <i class="bi bi-apple"></i>
+          Nutriție
+          <span class="badge">New</span>
+        </a>
+        <a href="suplimente.html" class="sidebar-item">
+          <i class="bi bi-capsule"></i>
+          Suplimente
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <h1 class="page-title">Rețetele Mele</h1>
+    
+    <div class="recipes-grid">
+      <!-- Recipe 1 -->
+      <a href="retete_details.html" class="recipe-card-link">
+
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Bowl Energizant cu Quinoa" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Prânz</span>
+          <h3 class="recipe-title">Bowl Energizant cu Quinoa</h3>
+          <p class="recipe-description">O combinație perfectă de proteine, carbohidrați complecși și vitamine pentru energie naturală.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 25 min</span>
+            <span><i class="bi bi-fire"></i> 420 kcal</span>
+            <span><i class="bi bi-people"></i> 2 porții</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.9</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+      <!-- Recipe 2 -->
+      <a href="retete_details.html" class="recipe-card-link">
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Smoothie Proteic Verde" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Mic Dejun</span>
+          <h3 class="recipe-title">Smoothie Proteic Verde</h3>
+          <p class="recipe-description">Smoothie plin de nutrienți cu spanac, banană și protein pudră pentru un început energic.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 5 min</span>
+            <span><i class="bi bi-fire"></i> 280 kcal</span>
+            <span><i class="bi bi-people"></i> 1 porție</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.7</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+      <!-- Recipe 3 -->
+      <a href="retete_details.html" class="recipe-card-link">
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Salată cu Avocado și Somon" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Cină</span>
+          <h3 class="recipe-title">Salată cu Avocado și Somon</h3>
+          <p class="recipe-description">Salată fresh cu avocado cremos, somon afumat și dressing de lămâie.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 15 min</span>
+            <span><i class="bi bi-fire"></i> 380 kcal</span>
+            <span><i class="bi bi-people"></i> 2 porții</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.8</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+      <!-- Recipe 4 -->
+      <a href="retete_details.html" class="recipe-card-link">
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Omletă Proteică" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Mic Dejun</span>
+          <h3 class="recipe-title">Omletă Proteică cu Verdețuri</h3>
+          <p class="recipe-description">Omletă bogată în proteine cu spanac, roșii cherry și brânză cottage.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 12 min</span>
+            <span><i class="bi bi-fire"></i> 340 kcal</span>
+            <span><i class="bi bi-people"></i> 1 porție</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.6</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+      <!-- Recipe 5 -->
+      <a href="retete_details.html" class="recipe-card-link">
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Wrap cu Pui și Hummus" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Prânz</span>
+          <h3 class="recipe-title">Wrap cu Pui și Hummus</h3>
+          <p class="recipe-description">Wrap nutritiv cu piept de pui grill, hummus de casa și legume proaspete.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 20 min</span>
+            <span><i class="bi bi-fire"></i> 450 kcal</span>
+            <span><i class="bi bi-people"></i> 1 porție</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.5</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+
+      <!-- Recipe 6 -->
+      <a href="retete_details.html" class="recipe-card-link">
+      <div class="recipe-card">
+        <img src="https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Budincă de Chia" class="recipe-image">
+        <div class="recipe-content">
+          <span class="recipe-category">Desert</span>
+          <h3 class="recipe-title">Budincă de Chia cu Fructe</h3>
+          <p class="recipe-description">Desert sănătos cu semințe de chia, lapte de cocos și fructe de pădure.</p>
+          <div class="recipe-meta">
+            <span><i class="bi bi-clock"></i> 10 min</span>
+            <span><i class="bi bi-fire"></i> 220 kcal</span>
+            <span><i class="bi bi-people"></i> 2 porții</span>
+          </div>
+          <div class="recipe-actions">
+            <div class="recipe-rating">
+              <i class="bi bi-star-fill"></i>
+              <span>4.9</span>
+            </div>
+            <div class="recipe-buttons">
+              <button class="btn-recipe btn-primary-recipe">
+                <i class="bi bi-play-fill"></i> Gătește
+              </button>
+              <button class="btn-recipe btn-outline-recipe">
+                <i class="bi bi-heart"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+      } else {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+    }
+
+    function showNotifications() {
+      alert('Ai 3 notificări noi!');
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const profileDropdown = document.getElementById('profileDropdown');
+      const profileTrigger = e.target.closest('.profile-trigger');
+      
+      if (!profileTrigger && profileDropdown.classList.contains('show')) {
+        profileDropdown.classList.remove('show');
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth > 992) {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        document.body.style.overflow = '';
+      } else {
+        sidebar.classList.remove('collapsed');
+        mainContent.classList.remove('expanded');
+      }
+    });
+
+    console.log('🍽️ Lista rețetelor încărcată - simplu și clean!');
+  </script>
+
+</body>
+</html>
