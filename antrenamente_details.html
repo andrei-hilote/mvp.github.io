@@ -1,0 +1,2616 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitFlow - Aplicația Ta de Fitness</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #764ba2;
+      --secondary: #ff7675;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --info: #74b9ff;
+      --danger: #e17055;
+      --dark: #2d3436;
+      --light: #ddd6fe;
+      --sidebar-width: 280px;
+      --header-height: 70px;
+      --recipe-primary: #10ac84;
+      --recipe-secondary: #ee5a24;
+      --recipe-accent: #feca57;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header - EXACT COPY FROM ORIGINAL */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: white;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1030;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      max-width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #6c757d;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-right: 16px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: var(--primary);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-center {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 20px;
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      padding: 0 45px 0 40px;
+      border: 2px solid #e9ecef;
+      border-radius: 21px;
+      background: #f8f9fa;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c757d;
+      font-size: 16px;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-input:not(:placeholder-shown) + .search-icon + .search-clear {
+      opacity: 1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: #f8f9fa;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .header-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 18px;
+      height: 18px;
+      background: var(--danger);
+      border-radius: 50%;
+      font-size: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .profile-section {
+      position: relative;
+      margin-left: 8px;
+    }
+
+    .profile-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+    }
+
+    .profile-trigger:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: inherit;
+    }
+
+    .profile-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-status {
+      font-size: 11px;
+      color: #6c757d;
+      line-height: 1;
+      margin: 2px 0 0 0;
+      white-space: nowrap;
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      padding: 16px 0;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1050;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 8px;
+    }
+
+    .dropdown-item-custom {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-item-custom:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .dropdown-item-custom i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    /* Sidebar - EXACT COPY FROM ORIGINAL */
+    .sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      background: white;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      z-index: 1020;
+      transition: all 0.3s ease;
+      transform: translateX(0);
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-content {
+      padding: 24px 0;
+    }
+
+    .sidebar-section {
+      margin-bottom: 32px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-bottom: 12px;
+      padding: 0 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      color: #495057;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sidebar-item:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .sidebar-item.active {
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), transparent);
+      color: var(--primary);
+      border-right: 3px solid var(--primary);
+    }
+
+    .sidebar-item i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .sidebar-item .badge {
+      margin-left: auto;
+      background: var(--primary);
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      margin-top: var(--header-height);
+      padding: 24px;
+      transition: all 0.3s ease;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    /* Sidebar Overlay for Mobile */
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1010;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Quick Stats Cards */
+    .quick-stats {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+      transition: all 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: #6c757d;
+      font-weight: 500;
+    }
+
+    /* Original Workout Styles */
+    .workout-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border: none;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .workout-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    /* Video Container */
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      aspect-ratio: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      margin: 0 auto 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    /* Exercise Icons */
+    .exercise-icon {
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 20px;
+      margin-right: 16px;
+      transition: all 0.3s ease;
+    }
+
+    .exercise-icon.cobra { background: linear-gradient(135deg, var(--secondary), #fd79a8); }
+    .exercise-icon.plank { background: linear-gradient(135deg, var(--warning), #e84393); }
+    .exercise-icon.rest { background: linear-gradient(135deg, var(--info), #0984e3); }
+    .exercise-icon.kicks { background: linear-gradient(135deg, #fd79a8, var(--warning)); }
+    .exercise-icon.lunges { background: linear-gradient(135deg, #6c5ce7, #a29bfe); }
+    .exercise-icon.squats { background: linear-gradient(135deg, var(--danger), #fd79a8); }
+    .exercise-icon.final { background: linear-gradient(135deg, var(--success), #00cec9); }
+
+    .big-exercise-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      font-size: 32px;
+      animation: pulse 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.05); }
+    }
+
+    /* Exercise List */
+    .exercise-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .exercise-item {
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      background: rgba(102, 126, 234, 0.05);
+      border: 1px solid rgba(102, 126, 234, 0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .exercise-item:hover {
+      background: rgba(102, 126, 234, 0.1);
+      transform: translateX(5px);
+    }
+
+    .exercise-item.active {
+      background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+      border-left: 4px solid var(--warning);
+      transform: scale(1.02);
+    }
+
+    .exercise-item.completed {
+      background: linear-gradient(135deg, #d4edda, #a8e6cf);
+      opacity: 0.8;
+    }
+
+    /* Buttons */
+    .btn-custom {
+      border-radius: 12px;
+      font-weight: 600;
+      padding: 12px 24px;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-custom.btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-custom.btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-custom.btn-outline-primary {
+      background: transparent;
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-custom.btn-outline-primary:hover {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-color: transparent;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* Timer Display */
+    .timer-display {
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+      color: var(--primary);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      padding: 16px 24px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 8px 0;
+    }
+
+    /* Progress Bar */
+    .progress-custom {
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      margin: 16px 0;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      border-radius: 10px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, var(--success), #00cec9);
+      color: white;
+      border-radius: 12px;
+      z-index: 1060;
+      transform: translateX(400px);
+      transition: transform 0.3s ease;
+      max-width: calc(100vw - 40px);
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    /* Workout Preview & Info Styles */
+    .workout-header {
+      margin-bottom: 20px;
+    }
+
+    .workout-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .workout-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .workout-description {
+      font-size: 0.95rem;
+      color: #495057;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    /* Enhanced Stats Grid */
+    .workout-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-card.difficulty-card::before {
+      background: linear-gradient(90deg, var(--warning), #e84393);
+    }
+
+    .stat-card.duration-card::before {
+      background: linear-gradient(90deg, var(--primary), var(--info));
+    }
+
+    .stat-card.calories-card::before {
+      background: linear-gradient(90deg, var(--secondary), #fd79a8);
+    }
+
+    .stat-card.focus-card::before {
+      background: linear-gradient(90deg, var(--success), #00cec9);
+    }
+
+    .stat-icon-container {
+      margin-bottom: 12px;
+      font-size: 1.4rem;
+    }
+
+    .difficulty-card .stat-icon-container {
+      color: var(--warning);
+    }
+
+    .duration-card .stat-icon-container {
+      color: var(--primary);
+    }
+
+    .calories-card .stat-icon-container {
+      color: var(--secondary);
+    }
+
+    .focus-card .stat-icon-container {
+      color: var(--success);
+    }
+
+    .stat-info {
+      text-align: left;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-value {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #333;
+      line-height: 1.3;
+    }
+
+    .stat-value small {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #6c757d;
+    }
+
+    /* Equipment Section */
+    .equipment-section {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-weight: 700;
+      color: #333;
+      font-size: 1rem;
+      margin: 0;
+      flex: 1;
+    }
+
+    .equipment-count {
+      background: var(--primary);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .equipment-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .equipment-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: white;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .equipment-item:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .equipment-visual {
+      position: relative;
+    }
+
+    .equipment-icon {
+      font-size: 2rem;
+    }
+
+    .equipment-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--secondary);
+      color: white;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .equipment-details {
+      flex: 1;
+    }
+
+    .equipment-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .equipment-specs {
+      font-size: 0.85rem;
+      color: #6c757d;
+      font-weight: 500;
+    }
+
+    /* Structure Timeline */
+    .structure-section {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .structure-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 40px;
+      bottom: -16px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(102, 126, 234, 0.3), transparent);
+    }
+
+    .timeline-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-icon.warmup {
+      background: linear-gradient(135deg, var(--info), #0984e3);
+    }
+
+    .timeline-icon.workout {
+      background: linear-gradient(135deg, var(--secondary), #fd79a8);
+    }
+
+    .timeline-icon.cooldown {
+      background: linear-gradient(135deg, var(--success), #00cec9);
+    }
+
+    .timeline-content {
+      flex: 1;
+      padding-top: 2px;
+    }
+
+    .timeline-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .timeline-duration {
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .timeline-desc {
+      font-size: 0.8rem;
+      color: #6c757d;
+      line-height: 1.4;
+    }
+
+    /* Quick Info Cards */
+    .quick-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .info-card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      border-left: 4px solid;
+      transition: all 0.3s ease;
+    }
+
+    .info-card.intensity {
+      border-left-color: var(--warning);
+    }
+
+    .info-card.recovery {
+      border-left-color: var(--success);
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-icon {
+      font-size: 1.5rem;
+    }
+
+    .info-content {
+      flex: 1;
+    }
+
+    .info-label {
+      font-size: 0.75rem;
+      color: #6c757d;
+      font-weight: 600;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    .info-value {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #333;
+    }
+
+    /* Workout Actions */
+    .workout-actions {
+      margin-top: 24px;
+    }
+
+    .workout-actions .btn {
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .workout-actions .btn-primary {
+      padding: 14px 24px;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .workout-actions .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .workout-actions .btn-sm {
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+
+    /* Responsive - FIXED */
+    @media (min-width: 1200px) {
+      .main-content {
+        margin-left: var(--sidebar-width);
+      }
+      
+      .main-content.expanded {
+        margin-left: 0;
+      }
+      
+      .sidebar {
+        transform: translateX(0);
+      }
+      
+      .sidebar.collapsed {
+        transform: translateX(-100%);
+      }
+      
+      .header-content {
+        padding: 0 32px;
+      }
+      
+      .header-center {
+        max-width: 600px;
+        margin: 0 32px;
+      }
+    }
+    
+    @media (min-width: 993px) and (max-width: 1199px) {
+      .main-content {
+        margin-left: var(--sidebar-width);
+      }
+      
+      .main-content.expanded {
+        margin-left: 0;
+      }
+      
+      .sidebar {
+        transform: translateX(0);
+      }
+      
+      .sidebar.collapsed {
+        transform: translateX(-100%);
+      }
+      
+      .header-content {
+        padding: 0 24px;
+      }
+      
+      .header-center {
+        max-width: 400px;
+        margin: 0 24px;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 1021;
+      }
+      
+      .sidebar.show {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .main-content.expanded {
+        margin-left: 0;
+      }
+      
+      .profile-info {
+        display: none;
+      }
+      
+      .header-content {
+        padding: 0 20px;
+      }
+      
+      .header-center {
+        max-width: 300px;
+        margin: 0 16px;
+      }
+      
+      .header-right {
+        gap: 10px;
+      }
+
+      .sidebar-toggle {
+        margin-right: 12px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 16px;
+      }
+      
+      .brand-logo span {
+        display: none;
+      }
+      
+      .header-center {
+        max-width: 200px;
+        margin: 0 12px;
+      }
+      
+      .search-input {
+        height: 38px;
+        padding: 0 35px 0 35px;
+        font-size: 13px;
+      }
+      
+      .search-icon {
+        font-size: 14px;
+        left: 12px;
+      }
+      
+      .search-clear {
+        font-size: 14px;
+        right: 12px;
+      }
+      
+      .header-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      .header-right {
+        gap: 8px;
+      }
+      
+      .profile-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+      }
+      
+      .sidebar-toggle {
+        width: 36px;
+        height: 36px;
+        margin-right: 8px;
+        font-size: 18px;
+      }
+      
+      .main-content {
+        padding: 16px;
+      }
+      
+      .video-container {
+        max-width: 100%;
+        aspect-ratio: 16/9;
+      }
+      
+      .exercise-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        margin-right: 12px;
+      }
+      
+      .big-exercise-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 24px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-content {
+        padding: 0 12px;
+      }
+      
+      .header-center {
+        max-width: 140px;
+        margin: 0 8px;
+      }
+      
+      .search-input {
+        height: 36px;
+        padding: 0 30px 0 30px;
+        font-size: 12px;
+      }
+      
+      .search-input::placeholder {
+        font-size: 11px;
+      }
+      
+      .search-icon {
+        font-size: 13px;
+        left: 10px;
+      }
+      
+      .search-clear {
+        font-size: 13px;
+        right: 10px;
+      }
+      
+      .header-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+      }
+      
+      .header-right {
+        gap: 6px;
+      }
+      
+      .profile-avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+      
+      .notification-badge {
+        width: 16px;
+        height: 16px;
+        font-size: 9px;
+        top: -3px;
+        right: -3px;
+      }
+      
+      .sidebar-toggle {
+        width: 32px;
+        height: 32px;
+        margin-right: 6px;
+        font-size: 16px;
+      }
+      
+      .main-content {
+        padding: 12px;
+      }
+      
+      .card-body {
+        padding: 16px;
+      }
+      
+      .btn-custom {
+        padding: 8px 16px;
+        font-size: 14px;
+      }
+      
+      .quick-stats {
+        padding: 16px;
+      }
+      
+      .stat-item {
+        padding: 12px;
+      }
+      
+      .stat-number {
+        font-size: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-content {
+        padding: 0 8px;
+      }
+      
+      .header-center {
+        max-width: 100px;
+        margin: 0 6px;
+      }
+      
+      .header-right {
+        gap: 4px;
+      }
+      
+      .profile-section {
+        margin-left: 4px;
+      }
+      
+      .sidebar-toggle {
+        margin-right: 4px;
+      }
+
+      /* Hide some header buttons on very small screens */
+      .header-btn:nth-child(2) {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-content">
+      <!-- Header Left -->
+      <div class="header-left">
+        <!-- Sidebar Toggle -->
+        <button class="sidebar-toggle" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
+          <i class="bi bi-list"></i>
+        </button>
+        
+        <!-- Brand Logo -->
+        <a href="#" class="brand-logo">
+          <div class="brand-icon">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <span>FitFlow</span>
+        </a>
+      </div>
+      
+      <!-- Header Center - Search Bar -->
+      <div class="header-center">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Caută rețete, ingrediente..." id="searchInput" aria-label="Search">
+          <i class="bi bi-search search-icon"></i>
+          <button class="search-clear" onclick="clearSearch()" aria-label="Clear search">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Header Right Section -->
+      <div class="header-right">
+        <!-- Quick Access Buttons -->
+        <button class="header-btn" title="Notificări" onclick="showNotifications()" aria-label="Notifications">
+          <i class="bi bi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        
+        <button class="header-btn d-none d-md-flex" title="Mesaje" onclick="showMessages()" aria-label="Messages">
+          <i class="bi bi-chat-dots"></i>
+          <span class="notification-badge">5</span>
+        </button>
+        
+        <button class="header-btn d-none d-lg-flex" title="Setări rapide" onclick="showSettings()" aria-label="Quick Settings">
+          <i class="bi bi-gear"></i>
+        </button>
+        
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <div class="profile-trigger" onclick="toggleProfileDropdown()">
+            <div class="profile-avatar">MC</div>
+            <div class="profile-info d-none d-md-block">
+              <div class="profile-name">Maria Cristina</div>
+              <div class="profile-status">Online</div>
+            </div>
+            <i class="bi bi-chevron-down d-none d-md-inline ms-1"></i>
+          </div>
+          
+          <!-- Profile Dropdown -->
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+              <div class="d-flex align-items-center">
+                <div class="profile-avatar me-3" style="width: 50px; height: 50px; font-size: 16px;">MC</div>
+                <div>
+                  <h6 class="mb-1">Maria Cristina</h6>
+                  <small class="text-muted">maria.cristina@email.com</small>
+                  <br>
+                  <small class="badge bg-primary">Premium Member</small>
+                </div>
+              </div>
+            </div>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-person-circle"></i>
+              Profilul Meu
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-graph-up-arrow"></i>
+              Statistici & Progres
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-trophy"></i>
+              Realizări & Insigna
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-heart-pulse"></i>
+              Monitorizare Sănătate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-gear"></i>
+              Setări Cont
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-question-circle"></i>
+              Ajutor & Suport
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-shield-check"></i>
+              Securitate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom text-danger" onclick="logout()">
+              <i class="bi bi-box-arrow-right"></i>
+              Deconectare
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <!-- Main Navigation -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Navigare Principală</div>
+        
+        <a href="index.html" class="sidebar-item">
+          <i class="bi bi-house-fill"></i>
+          Dashboard
+        </a>
+        
+        <a href="antrenamente_list.html" class="sidebar-item active">
+          <i class="bi bi-lightning-charge"></i>
+          Antrenamente
+          <span class="badge">12</span>
+        </a>
+        
+
+        <a href="retete_list.html" class="sidebar-item">
+          <i class="bi bi-apple"></i>
+          Nutriție
+          <span class="badge">New</span>
+        </a>
+        <a href="suplimente.html" class="sidebar-item">
+          <i class="bi bi-capsule"></i>
+          Suplimente
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    
+    <!-- Notification -->
+    <div id="workoutNotification" class="notification"></div>
+    <div class="row g-4">
+      <!-- Left Column - Workout Preview & Info -->
+      <div class="col-xl-4 col-lg-6">
+        <div class="workout-card">
+          <div class="card-body">
+            <!-- Workout Header -->
+            <div class="text-center mb-4">
+              <div class="workout-header">
+                <div class="workout-title">Antrenament Picioare</div>
+                <div class="workout-subtitle">Luni • Săptămâna 3</div>
+                <div class="workout-description">
+                  Dezvoltă forța și rezistența picioarelor prin exerciții variate și intensive
+                </div>
+              </div>
+            </div>
+            
+            <!-- Workout Stats Grid -->
+            <div class="workout-stats-grid mb-4">
+              <div class="stat-card difficulty-card">
+                <div class="stat-icon-container">
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-fill"></i>
+                  <i class="bi bi-star-half"></i>
+                  <i class="bi bi-star"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-label">Dificultate</div>
+                  <div class="stat-value">Intermediar</div>
+                </div>
+              </div>
+              
+              <div class="stat-card duration-card">
+                <div class="stat-icon-container">
+                  <i class="bi bi-clock-fill"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-label">Durata Totală</div>
+                  <div class="stat-value">30 minute</div>
+                </div>
+              </div>
+              
+              <div class="stat-card calories-card">
+                <div class="stat-icon-container">
+                  <i class="bi bi-fire"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-label">Calorii Estimate</div>
+                  <div class="stat-value">~340 kcal</div>
+                </div>
+              </div>
+              
+              <div class="stat-card focus-card">
+                <div class="stat-icon-container">
+                  <i class="bi bi-bullseye"></i>
+                </div>
+                <div class="stat-info">
+                  <div class="stat-label">Grupuri Musculare</div>
+                  <div class="stat-value">Cvadriceps<br><small>Fesieri • Gambieri</small></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Equipment Required -->
+            <div class="equipment-section mb-4">
+              <div class="section-header">
+                <h6 class="section-title">
+                  <i class="bi bi-tools me-2"></i>
+                  Echipament Necesar
+                </h6>
+                <span class="equipment-count">2 articole</span>
+              </div>
+              
+              <div class="equipment-grid">
+                <div class="equipment-item">
+                  <div class="equipment-visual">
+                    <div class="equipment-icon">🏋️</div>
+                    <div class="equipment-badge">2x</div>
+                  </div>
+                  <div class="equipment-details">
+                    <div class="equipment-name">Gantere</div>
+                    <div class="equipment-specs">2-5 kg fiecare</div>
+                  </div>
+                </div>
+                
+                <div class="equipment-item">
+                  <div class="equipment-visual">
+                    <div class="equipment-icon">🧘</div>
+                  </div>
+                  <div class="equipment-details">
+                    <div class="equipment-name">Saltea Yoga</div>
+                    <div class="equipment-specs">Pentru exercițiile la sol</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Workout Structure -->
+            <div class="structure-section mb-4">
+              <h6 class="section-title">
+                <i class="bi bi-list-ol me-2"></i>
+                Structura Antrenamentului
+              </h6>
+              
+              <div class="structure-timeline">
+                <div class="timeline-item">
+                  <div class="timeline-icon warmup">
+                    <i class="bi bi-heart-pulse"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">Încălzire</div>
+                    <div class="timeline-duration">3 exerciții • 2 min</div>
+                    <div class="timeline-desc">Pregătirea corpului pentru efort</div>
+                  </div>
+                </div>
+                
+                <div class="timeline-item">
+                  <div class="timeline-icon workout">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">Antrenament Principal</div>
+                    <div class="timeline-duration">4 exerciții • 25 min</div>
+                    <div class="timeline-desc">Exerciții intensive pentru picioare</div>
+                  </div>
+                </div>
+                
+                <div class="timeline-item">
+                  <div class="timeline-icon cooldown">
+                    <i class="bi bi-wind"></i>
+                  </div>
+                  <div class="timeline-content">
+                    <div class="timeline-title">Relaxare</div>
+                    <div class="timeline-duration">1 exercițiu • 3 min</div>
+                    <div class="timeline-desc">Revenirea la normalitate</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Quick Info Cards -->
+            <div class="quick-info mb-4">
+              <div class="info-card intensity">
+                <div class="info-icon">⚡</div>
+                <div class="info-content">
+                  <div class="info-label">Intensitate</div>
+                  <div class="info-value">Moderată-Ridicată</div>
+                </div>
+              </div>
+              
+              <div class="info-card recovery">
+                <div class="info-icon">⏱️</div>
+                <div class="info-content">
+                  <div class="info-label">Timp Recuperare</div>
+                  <div class="info-value">24-48 ore</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="workout-actions">
+              <button class="btn btn-custom btn-primary w-100 mb-2" onclick="startWorkoutReady()">
+                <i class="bi bi-play-fill me-2"></i>
+                Începe Antrenamentul
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Column - Exercise List -->
+      <div class="col-xl-4 col-lg-6">
+        <div class="workout-card">
+          <div class="card-body">
+            <h4 class="fw-semibold mb-4">Exerciții</h4>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-semibold mb-0">Încălzire</h6>
+              <small class="text-muted">3 Exerciții • 2 Min</small>
+            </div>
+            
+            <ul class="exercise-list" id="exerciseList">
+              <!-- Exercises will be populated by JavaScript -->
+            </ul>
+            
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-4">
+              <h6 class="fw-semibold mb-0">Antrenament</h6>
+              <small class="text-muted">4 Exerciții • 25 Min</small>
+            </div>
+            
+            <ul class="exercise-list" id="workoutList">
+              <!-- Workout exercises will be populated by JavaScript -->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Active Workout -->
+      <div class="col-xl-4 col-lg-12">
+        <div class="workout-card">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <h4 class="fw-semibold mb-0">Antrenament Activ</h4>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-clock me-1 text-muted"></i>
+                <h5 class="mb-0 timer-display" id="totalTimer">00:00</h5>
+              </div>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="progress-custom">
+              <div class="progress-fill" id="workoutProgress"></div>
+            </div>
+            
+            <div class="text-center mb-3">
+              <h6 class="text-muted mb-2" id="exerciseCounter">Exercițiul 1/7</h6>
+            </div>
+            
+            <!-- Video Container -->
+            <div class="video-container" id="videoContainer">
+              <div class="text-center">
+                <div class="big-exercise-icon">
+                  <i class="bi bi-play-circle" style="font-size: 40px;"></i>
+                </div>
+                <div class="fw-semibold">Apasă Start pentru a începe</div>
+                <div class="small mt-1 opacity-75">antrenamentul</div>
+              </div>
+            </div>
+            
+            <div class="text-center py-3">
+              <h2 class="timer-display" id="exerciseTimer">00:00</h2>
+              <h4 id="currentExerciseName" class="fw-semibold">Gata să începi!</h4>
+            </div>
+            
+            <div class="mb-4">
+              <h6 class="text-muted mb-2">
+                <i class="bi bi-arrow-right me-1"></i>
+                Exercițiul următor
+              </h6>
+              <div id="nextExercisePreview" class="p-3 rounded" style="background: rgba(102, 126, 234, 0.05);">
+                <div class="d-flex align-items-center">
+                  <div class="exercise-icon cobra me-3">
+                    <i class="bi bi-activity"></i>
+                  </div>
+                  <div>
+                    <h6 class="fw-semibold mb-1">Întinderea Cobra</h6>
+                    <p class="text-muted small mb-0">0:40</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <button class="btn btn-custom btn-outline-primary w-100" onclick="toggleWorkout()" id="pauseBtn">
+                  <i class="bi bi-play-fill me-1"></i>
+                  Start
+                </button>
+              </div>
+              <div class="col-6">
+                <button class="btn btn-custom btn-primary w-100" onclick="finishWorkout()" id="finishBtn">
+                  <i class="bi bi-flag-fill me-1"></i>
+                  Finalizare
+                </button>
+              </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="d-flex align-items-center justify-content-center gap-2">
+              <button class="btn btn-outline-secondary btn-sm" onclick="previousExercise()" id="prevBtn">
+                <i class="bi bi-skip-backward-fill"></i>
+              </button>
+              <button class="btn btn-outline-warning btn-sm d-none" onclick="skipRest()" id="skipBtn">
+                <i class="bi bi-skip-forward-fill me-1"></i>
+                Sari Pauza
+              </button>
+              <button class="btn btn-outline-secondary btn-sm" onclick="nextExercise()" id="nextBtn">
+                <i class="bi bi-skip-forward-fill"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Add SVG Gradient Definition -->
+  <svg width="0" height="0">
+    <defs>
+      <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <script>
+    // Exercise data
+    const exercises = [
+      {
+        name: "Întinderea Cobra",
+        duration: 40,
+        type: "time",
+        videoPath: "./assets/videos/992715-hd_1920_1080_25fps.mp4",
+        icon: "cobra",
+        description: "O întindere ușoară a spatelui care deschide pieptul și întărește coloana vertebrală",
+        equipment: ["Saltea"],
+        category: "warmup"
+      },
+      {
+        name: "Ridicări Plank",
+        duration: 40,
+        type: "time", 
+        videoPath: "./assets/videos/3195943-uhd_3840_2160_25fps.mp4",
+        icon: "plank",
+        description: "Exercițiu dinamic de întărire a core-ului",
+        equipment: ["Saltea"],
+        category: "warmup"
+      },
+      {
+        name: "Pauză",
+        duration: 30,
+        type: "rest",
+        videoPath: null,
+        icon: "rest",
+        description: "Ia o pauză să îți revii",
+        equipment: [],
+        category: "warmup"
+      },
+      {
+        name: "Călcâie Duble",
+        duration: 20,
+        type: "reps",
+        videoPath: "./assets/videos/3209068-uhd_3840_2160_25fps.mp4",
+        icon: "kicks",
+        description: "Mișcare explozivă a călcâielor",
+        equipment: ["Saltea"],
+        category: "workout"
+      },
+      {
+        name: "Sărituri Fandări",
+        duration: 20,
+        type: "reps",
+        videoPath: "./assets/videos/3209241-uhd_3840_2160_25fps.mp4",
+        icon: "lunges",
+        description: "Fandări alternante cu sărituri",
+        equipment: ["Saltea"],
+        category: "workout"
+      },
+      {
+        name: "Sărituri Genuflexiuni",
+        duration: 20,
+        type: "reps",
+        videoPath: "./assets/videos/3694913-uhd_2160_3840_30fps.mp4",
+        icon: "squats",
+        description: "Mișcare explozivă de genuflexiuni",
+        equipment: ["2 Gantere"],
+        category: "workout"
+      },
+      {
+        name: "Pauză Finală",
+        duration: 30,
+        type: "rest",
+        videoPath: null,
+        icon: "final",
+        description: "Perioada finală de odihnă",
+        equipment: [],
+        category: "workout"
+      }
+    ];
+
+    // Exercise icons mapping
+    const exerciseIcons = {
+      rest: '<i class="bi bi-pause-circle"></i>',
+      kicks: '<i class="bi bi-arrow-up-circle"></i>',
+      lunges: '<i class="bi bi-arrows-move"></i>',
+      cobra: '<i class="bi bi-arrow-up-circle"></i>',
+      plank: '<i class="bi bi-arrow-up-circle"></i>',
+      squats: '<i class="bi bi-arrow-down-up"></i>',
+      final: '<i class="bi bi-check-circle"></i>'
+    };
+
+    // Global variables
+    let currentExerciseIndex = 0;
+    let isRunning = false;
+    let isPaused = false;
+    let currentTime = 0;
+    let totalElapsedTime = 0;
+    let timer = null;
+    let totalTimer = null;
+
+    // Sidebar Functions
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth <= 992) {
+        // Mobile behavior
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+      } else {
+        // Desktop behavior
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
+    }
+
+    // Profile Dropdown Functions
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function logout() {
+      if (confirm('Ești sigur că vrei să te deconectezi?')) {
+        showNotification('Te-ai deconectat cu succes!');
+        // Here you would typically redirect to login page
+        console.log('User logged out');
+      }
+    }
+
+    // Header Functions
+    function clearSearch() {
+      const searchInput = document.getElementById('searchInput');
+      searchInput.value = '';
+      searchInput.focus();
+    }
+
+    function showNotifications() {
+      showNotification('Ai 3 notificări noi: 2 provocări completate și 1 mesaj nou!');
+    }
+
+    function showMessages() {
+      showNotification('Ai 5 mesaje necitite de la prietenii din fitness!');
+    }
+
+    function showSettings() {
+      showNotification('Meniu setări deschis - aici poți configura preferințele tale!');
+    }
+
+    // Workout Preview Functions
+    function previewWorkout() {
+      showNotification("📋 Deschidere preview exerciții - vezi toate mișcările înainte să începi!");
+    }
+
+    function customizeWorkout() {
+      showNotification("⚙️ Personalizare antrenament - ajustează dificultatea și durata!");
+    }
+
+    function startWorkoutReady() {
+      showNotification("🚀 Pregătit pentru antrenament? Să începem!");
+      toggleWorkout();
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const query = e.target.value.toLowerCase();
+      if (query.length > 2) {
+        showNotification(`Căutare pentru: "${query}"`);
+        // Here you would implement actual search functionality
+      }
+    });
+
+    // Initialize workout
+    function initWorkout() {
+      populateExerciseList();
+      updateDisplay();
+      updateNextExercisePreview();
+      showNotification("Bine ai venit în FitFlow! Antrenamentul este gata de pornire.");
+    }
+
+    // Populate exercise lists
+    function populateExerciseList() {
+      const warmupList = document.getElementById('exerciseList');
+      const workoutList = document.getElementById('workoutList');
+      
+      warmupList.innerHTML = '';
+      workoutList.innerHTML = '';
+      
+      exercises.forEach((exercise, index) => {
+        const durationText = exercise.type === 'rest' ? `${exercise.duration}s` : 
+                            exercise.type === 'reps' ? `X${exercise.duration}` : 
+                            `${exercise.duration}s`;
+        
+        const listItem = document.createElement('li');
+        listItem.className = 'exercise-item';
+        listItem.setAttribute('data-exercise', index);
+        listItem.innerHTML = `
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center flex-grow-1">
+              <div class="exercise-icon ${exercise.icon}">
+                ${exerciseIcons[exercise.icon]}
+              </div>
+              <div class="flex-grow-1">
+                <h6 class="fw-semibold mb-1">${exercise.name}</h6>
+                <p class="text-muted small mb-0">${durationText}</p>
+              </div>
+            </div>
+            <button class="btn btn-link p-0 text-primary" onclick="showExerciseInfo(${index})">
+              <i class="bi bi-info-circle"></i>
+            </button>
+          </div>
+        `;
+        
+        if (exercise.category === 'warmup') {
+          warmupList.appendChild(listItem);
+        } else {
+          workoutList.appendChild(listItem);
+        }
+      });
+    }
+
+    // Get current exercise
+    function getCurrentExercise() {
+      return exercises[currentExerciseIndex];
+    }
+
+    // Update display
+    function updateDisplay() {
+      const exercise = getCurrentExercise();
+      if (!exercise) return;
+
+      document.getElementById('exerciseCounter').textContent = `Exercițiul ${currentExerciseIndex + 1}/${exercises.length}`;
+      document.getElementById('currentExerciseName').textContent = exercise.name;
+      
+      currentTime = exercise.duration;
+      updateExerciseTimer();
+      updateVideoContainer(exercise);
+      highlightCurrentExercise();
+      updateButtonStates();
+      updateProgressBar();
+    }
+
+    // Update video container
+    function updateVideoContainer(exercise) {
+      const container = document.getElementById('videoContainer');
+      
+      if (exercise.type === 'rest') {
+        container.innerHTML = `
+          <div class="text-center">
+            <div class="big-exercise-icon">
+              ${exerciseIcons[exercise.icon]}
+            </div>
+            <div class="fw-semibold">${exercise.name}</div>
+            <div class="small mt-1 opacity-75">Ia o pauză</div>
+          </div>
+        `;
+      } else if (exercise.videoPath) {
+        container.innerHTML = `
+          <video 
+            width="100%" 
+            height="100%" 
+            controls 
+            autoplay 
+            muted
+            loop
+            style="border-radius: 16px; object-fit: cover;">
+            <source src="${exercise.videoPath}" type="video/mp4">
+            <div class="text-center" style="color: white; padding: 20px;">
+              <div class="big-exercise-icon">
+                ${exerciseIcons[exercise.icon]}
+              </div>
+              <div class="fw-semibold">Video indisponibil</div>
+              <div class="small mt-1">Verifică calea video</div>
+            </div>
+          </video>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="text-center">
+            <div class="big-exercise-icon">
+              ${exerciseIcons[exercise.icon]}
+            </div>
+            <div class="fw-semibold">${exercise.name}</div>
+            <div class="small mt-1 opacity-75">
+              ${exercise.type === 'reps' ? `${exercise.duration} repetări` : `${exercise.duration} secunde`}
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Highlight current exercise
+    function highlightCurrentExercise() {
+      document.querySelectorAll('[data-exercise]').forEach(item => {
+        item.classList.remove('active', 'completed');
+      });
+      
+      for (let i = 0; i < exercises.length; i++) {
+        const element = document.querySelector(`[data-exercise="${i}"]`);
+        if (element) {
+          if (i < currentExerciseIndex) {
+            element.classList.add('completed');
+          } else if (i === currentExerciseIndex) {
+            element.classList.add('active');
+          }
+        }
+      }
+    }
+
+    // Update next exercise preview
+    function updateNextExercisePreview() {
+      const nextIndex = currentExerciseIndex + 1;
+      const preview = document.getElementById('nextExercisePreview');
+      
+      if (nextIndex < exercises.length) {
+        const nextExercise = exercises[nextIndex];
+        const durationText = nextExercise.type === 'rest' ? `${nextExercise.duration}s` : 
+                            nextExercise.type === 'reps' ? `X${nextExercise.duration}` : 
+                            `${nextExercise.duration}s`;
+        
+        preview.innerHTML = `
+          <div class="d-flex align-items-center">
+            <div class="exercise-icon ${nextExercise.icon} me-3">
+              ${exerciseIcons[nextExercise.icon]}
+            </div>
+            <div>
+              <h6 class="fw-semibold mb-1">${nextExercise.name}</h6>
+              <p class="text-muted small mb-0">${durationText}</p>
+            </div>
+          </div>
+        `;
+      } else {
+        preview.innerHTML = `
+          <div class="d-flex align-items-center">
+            <div class="exercise-icon final me-3">
+              ${exerciseIcons.final}
+            </div>
+            <div>
+              <h6 class="fw-semibold mb-1">Antrenament Finalizat!</h6>
+              <p class="text-muted small mb-0">Muncă excelentă!</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    // Update button states
+    function updateButtonStates() {
+      const pauseBtn = document.getElementById('pauseBtn');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const skipBtn = document.getElementById('skipBtn');
+      
+      if (isRunning && !isPaused) {
+        pauseBtn.innerHTML = '<i class="bi bi-pause-fill me-1"></i>Pauză';
+        pauseBtn.className = 'btn btn-custom btn-warning w-100';
+      } else {
+        pauseBtn.innerHTML = isPaused ? '<i class="bi bi-play-fill me-1"></i>Continuă' : '<i class="bi bi-play-fill me-1"></i>Start';
+        pauseBtn.className = 'btn btn-custom btn-outline-primary w-100';
+      }
+      
+      prevBtn.disabled = currentExerciseIndex === 0;
+      nextBtn.disabled = currentExerciseIndex === exercises.length - 1;
+      
+      const currentExercise = getCurrentExercise();
+      if (currentExercise.type === 'rest') {
+        skipBtn.classList.remove('d-none');
+      } else {
+        skipBtn.classList.add('d-none');
+      }
+    }
+
+    // Update progress bar
+    function updateProgressBar() {
+      const progress = (currentExerciseIndex / exercises.length) * 100;
+      document.getElementById('workoutProgress').style.width = `${progress}%`;
+    }
+
+    // Update exercise timer
+    function updateExerciseTimer() {
+      const minutes = Math.floor(currentTime / 60);
+      const seconds = currentTime % 60;
+      document.getElementById('exerciseTimer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Update total timer
+    function updateTotalTimer() {
+      const minutes = Math.floor(totalElapsedTime / 60);
+      const seconds = totalElapsedTime % 60;
+      document.getElementById('totalTimer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    // Start workout
+    function startWorkout() {
+      if (isPaused) {
+        resumeWorkout();
+        return;
+      }
+
+      isRunning = true;
+      isPaused = false;
+      
+      const exercise = getCurrentExercise();
+      currentTime = exercise.duration;
+      
+      timer = setInterval(() => {
+        currentTime--;
+        updateExerciseTimer();
+        
+        if (currentTime <= 0) {
+          completeCurrentExercise();
+        }
+      }, 1000);
+
+      totalTimer = setInterval(() => {
+        totalElapsedTime++;
+        updateTotalTimer();
+      }, 1000);
+
+      updateButtonStates();
+      showNotification(`A început: ${exercise.name}`);
+      
+      if (exercise.videoPath && exercise.type !== 'rest') {
+        const container = document.getElementById('videoContainer');
+        container.innerHTML = `
+          <video 
+            width="100%" 
+            height="100%" 
+            controls 
+            autoplay
+            loop
+            style="border-radius: 16px; object-fit: cover;">
+            <source src="${exercise.videoPath}" type="video/mp4">
+            <div class="text-center" style="color: white; padding: 20px;">
+              <div class="big-exercise-icon">
+                ${exerciseIcons[exercise.icon]}
+              </div>
+              <div class="fw-semibold">Video indisponibil</div>
+              <div class="small mt-1">Verifică calea video</div>
+            </div>
+          </video>
+        `;
+        
+        const video = container.querySelector('video');
+        if (video) {
+          video.muted = false;
+          video.play().catch(e => console.log('Redarea automată a fost împiedicată:', e));
+        }
+      }
+    }
+
+    // Pause workout
+    function pauseWorkout() {
+      isPaused = true;
+      isRunning = false;
+      
+      clearInterval(timer);
+      clearInterval(totalTimer);
+      
+      updateButtonStates();
+      showNotification("Antrenament întrerupt");
+    }
+
+    // Resume workout
+    function resumeWorkout() {
+      isPaused = false;
+      isRunning = true;
+      
+      timer = setInterval(() => {
+        currentTime--;
+        updateExerciseTimer();
+        
+        if (currentTime <= 0) {
+          completeCurrentExercise();
+        }
+      }, 1000);
+
+      totalTimer = setInterval(() => {
+        totalElapsedTime++;
+        updateTotalTimer();
+      }, 1000);
+
+      updateButtonStates();
+      showNotification("Antrenament reluat");
+    }
+
+    // Complete current exercise
+    function completeCurrentExercise() {
+      clearInterval(timer);
+      
+      if (currentExerciseIndex < exercises.length - 1) {
+        currentExerciseIndex++;
+        updateDisplay();
+        updateNextExercisePreview();
+        
+        if (isRunning) {
+          setTimeout(() => {
+            if (isRunning) {
+              const nextExercise = getCurrentExercise();
+              currentTime = nextExercise.duration;
+              
+              timer = setInterval(() => {
+                currentTime--;
+                updateExerciseTimer();
+                
+                if (currentTime <= 0) {
+                  completeCurrentExercise();
+                }
+              }, 1000);
+              
+              updateVideoContainer(nextExercise);
+              showNotification(`Următor: ${nextExercise.name}`);
+            }
+          }, 1000);
+        }
+      } else {
+        completeWorkout();
+      }
+    }
+
+    // Complete workout
+    function completeWorkout() {
+      isRunning = false;
+      clearInterval(timer);
+      clearInterval(totalTimer);
+      
+      document.getElementById('currentExerciseName').textContent = "Antrenament Finalizat!";
+      document.getElementById('exerciseTimer').textContent = "Gata!";
+      
+      const videoContainer = document.getElementById('videoContainer');
+      videoContainer.innerHTML = `
+        <div class="text-center">
+          <div class="big-exercise-icon">
+            ${exerciseIcons.final}
+          </div>
+          <div class="fw-semibold">Felicitări!</div>
+          <div class="small mt-1 opacity-75">Ai finalizat antrenamentul!</div>
+        </div>
+      `;
+      
+      document.getElementById('workoutProgress').style.width = '100%';
+      updateButtonStates();
+      showNotification("🎉 Antrenament Finalizat! Muncă excelentă!");
+    }
+
+    // Toggle workout (start/pause)
+    function toggleWorkout() {
+      if (isRunning && !isPaused) {
+        pauseWorkout();
+      } else {
+        startWorkout();
+      }
+    }
+
+    // Finish workout
+    function finishWorkout() {
+      if (confirm('Ești sigur că vrei să finalizezi antrenamentul?')) {
+        isRunning = false;
+        isPaused = false;
+        clearInterval(timer);
+        clearInterval(totalTimer);
+        currentExerciseIndex = 0;
+        totalElapsedTime = 0;
+        updateDisplay();
+        updateTotalTimer();
+        document.getElementById('workoutProgress').style.width = '0%';
+        showNotification("Antrenament resetat");
+      }
+    }
+
+    // Next exercise
+    function nextExercise() {
+      if (currentExerciseIndex < exercises.length - 1) {
+        if (isRunning) {
+          clearInterval(timer);
+        }
+        
+        currentExerciseIndex++;
+        updateDisplay();
+        updateNextExercisePreview();
+        
+        if (isRunning && !isPaused) {
+          setTimeout(() => {
+            const exercise = getCurrentExercise();
+            currentTime = exercise.duration;
+            
+            timer = setInterval(() => {
+              currentTime--;
+              updateExerciseTimer();
+              
+              if (currentTime <= 0) {
+                completeCurrentExercise();
+              }
+            }, 1000);
+            
+            updateVideoContainer(exercise);
+          }, 500);
+        }
+        
+        showNotification(`Trecut la: ${getCurrentExercise().name}`);
+      }
+    }
+
+    // Previous exercise
+    function previousExercise() {
+      if (currentExerciseIndex > 0) {
+        if (isRunning) {
+          clearInterval(timer);
+        }
+        
+        currentExerciseIndex--;
+        updateDisplay();
+        updateNextExercisePreview();
+        
+        if (isRunning && !isPaused) {
+          setTimeout(() => {
+            const exercise = getCurrentExercise();
+            currentTime = exercise.duration;
+            
+            timer = setInterval(() => {
+              currentTime--;
+              updateExerciseTimer();
+              
+              if (currentTime <= 0) {
+                completeCurrentExercise();
+              }
+            }, 1000);
+            
+            updateVideoContainer(exercise);
+          }, 500);
+        }
+        
+        showNotification(`Trecut la: ${getCurrentExercise().name}`);
+      }
+    }
+
+    // Skip rest
+    function skipRest() {
+      const exercise = getCurrentExercise();
+      if (exercise.type === 'rest') {
+        currentTime = 1;
+        showNotification("Pauza sărita");
+      }
+    }
+
+    // Show exercise info
+    function showExerciseInfo(exerciseIndex) {
+      const exercise = exercises[exerciseIndex];
+      showNotification(`${exercise.name}: ${exercise.description}`);
+    }
+
+    // Show notification
+    function showNotification(message) {
+      const notification = document.getElementById('workoutNotification');
+      if (notification) {
+        notification.textContent = message;
+        notification.classList.add('show');
+        
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 3000);
+      }
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      const profileDropdown = document.getElementById('profileDropdown');
+      const profileTrigger = e.target.closest('.profile-trigger');
+      
+      if (!profileTrigger && profileDropdown.classList.contains('show')) {
+        profileDropdown.classList.remove('show');
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth > 992) {
+        // Desktop: remove mobile classes
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+        
+        // Reset to default desktop state
+        if (!sidebar.classList.contains('collapsed')) {
+          mainContent.classList.remove('expanded');
+        } else {
+          mainContent.classList.add('expanded');
+        }
+      } else {
+        // Mobile: ensure proper state
+        sidebar.classList.remove('collapsed');
+        mainContent.classList.remove('expanded');
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(e) {
+      // Don't trigger shortcuts when typing in inputs
+      if (e.target.matches('input, textarea')) {
+        return;
+      }
+      
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleWorkout();
+      }
+      
+      if (e.code === 'ArrowRight') {
+        e.preventDefault();
+        nextExercise();
+      }
+      
+      if (e.code === 'ArrowLeft') {
+        e.preventDefault();
+        previousExercise();
+      }
+      
+      if (e.code === 'Escape') {
+        e.preventDefault();
+        // Close sidebar if open
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        if (sidebar.classList.contains('show')) {
+          closeSidebar();
+        } else if (isRunning) {
+          finishWorkout();
+        }
+      }
+      
+      if (e.code === 'KeyS' && getCurrentExercise().type === 'rest') {
+        e.preventDefault();
+        skipRest();
+      }
+      
+      // Sidebar toggle with Ctrl+B
+      if (e.ctrlKey && e.code === 'KeyB') {
+        e.preventDefault();
+        toggleSidebar();
+      }
+      
+      // Search focus with Ctrl+K
+      if (e.ctrlKey && e.code === 'KeyK') {
+        e.preventDefault();
+        document.getElementById('searchInput').focus();
+      }
+    });
+
+    // Initialize sidebar items click handlers
+    // document.addEventListener('DOMContentLoaded', function() {
+    //   // Add click handlers for sidebar items
+    //   const sidebarItems = document.querySelectorAll('.sidebar-item');
+    //   sidebarItems.forEach(item => {
+    //     item.addEventListener('click', function(e) {
+    //       e.preventDefault();
+          
+    //       // Remove active class from all items
+    //       sidebarItems.forEach(i => i.classList.remove('active'));
+          
+    //       // Add active class to clicked item
+    //       this.classList.add('active');
+          
+    //       // Show notification based on clicked item
+    //       const itemText = this.textContent.trim();
+    //       showNotification(`Navigare către: ${itemText}`);
+          
+    //       // Close sidebar on mobile after selection
+    //       if (window.innerWidth <= 992) {
+    //         setTimeout(() => {
+    //           closeSidebar();
+    //         }, 300);
+    //       }
+    //     });
+    //   });
+    // });
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('🚀 Inițializare FitFlow...');
+      
+      try {
+        initWorkout();
+        console.log('✅ FitFlow a fost inițializată cu succes!');
+        console.log(`
+🎮 COMENZI RAPIDE:
+⏯️  Spațiu - Play/Pause antrenament
+➡️  Săgeată Dreapta - Exercițiul următor
+⬅️  Săgeată Stânga - Exercițiul anterior
+⏹️  Escape - Închide sidebar / Finalizează antrenament
+⏭️  S - Sari pauza (doar în timpul pauzelor)
+🔍  Ctrl+K - Focus pe bara de căutare
+📋  Ctrl+B - Toggle sidebar
+        `);
+      } catch (error) {
+        console.error('❌ Eroare la inițializare:', error);
+        showNotification('Eroare la încărcarea aplicației');
+      }
+    });
+
+    console.log('💪 FitFlow este gata de utilizare!');
+  </script>
+
+</body>
+</html>
