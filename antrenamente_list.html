@@ -924,9 +924,79 @@
           </div>
         </div>
       </a>
+
+       <a href="antrenamente_details.html" class="workout-card-link">
+        <div class="workout-card">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Antrenament Spate" class="workout-image">
+          <div class="workout-content">
+            <span class="workout-date">13 Dec 2024</span>
+            <h3 class="workout-title">Antrenament - Spate, Biceps</h3>
+            <p class="workout-description">Dezvoltarea musculaturii spatelui și bicepsului prin exerciții de tracțiune și izolare.</p>
+            <div class="workout-meta">
+              <span><i class="bi bi-clock"></i> 50 min</span>
+              <span><i class="bi bi-fire"></i> 400 kcal</span>
+              <span><i class="bi bi-lightning"></i> Intermediar</span>
+            </div>
+            <div class="workout-actions">
+              <div class="workout-status completed">
+                <i class="bi bi-check-circle-fill"></i>
+                <span>Completat</span>
+              </div>
+              <div class="workout-buttons">
+                <button class="btn-workout btn-primary-workout">
+                  <i class="bi bi-play-fill"></i> Repetă
+                </button>
+                <button class="btn-workout btn-outline-workout">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   </main>
 </body>
+<script type="text/javascript">
+    
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+      } else {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+    }
+
+    function showNotifications() {
+      alert('Ai 3 notificări noi!');
+    }
+  </script>
+</script>
 </html>
 
 

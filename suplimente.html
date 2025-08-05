@@ -908,14 +908,46 @@
         </div>
       </div>
 
-      <!-- Supplement 4 -->
-      <div class="supplement-card">
-        <img src="https://images.unsplash.com/photo-1559181567-c3190ca9959b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Pre-Workout" class="supplement-image">
-        <div class="supplement-content">
-          <span class="supplement-category">Energie</span>
-          <h3 class="supplement-title">Pre-Workout Complex</h3>
-          <p class="supplement-description">Formula avansată pentru energie, focus și performanță maximă în antrenamente.</p>
-          <div class="supplement-meta">
-            <span><i class="bi bi-droplet"></i> 300g</span>
-            <span><i class="bi bi-cup"></i> 30 porții</span>
-            <span class="stock-status in-stock">În stoc
+      </div>
+    </main>
+  </body>
+  <script>
+    
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+        document.body.style.overflow = sidebar.classList.contains('show') ? 'hidden' : '';
+      } else {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+    }
+
+    function showNotifications() {
+      alert('Ai 3 notificări noi!');
+    }
+  </script>
+  </html>
