@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="181" height="50" viewBox="0 0 181 50" fill="none">
+  
+  <!-- Main title: ALIN PLATEC -->
+  <text x="90.5" y="22" 
+        font-family="Arial, sans-serif" 
+        font-size="18" 
+        font-weight="bold" 
+        fill="#b8ff00" 
+        text-anchor="middle" 
+        letter-spacing="2px">ALIN PLATEC</text>
+  
+  <!-- Subtitle: PERSONAL TRAINER -->
+  <text x="90.5" y="38" 
+        font-family="Arial, sans-serif" 
+        font-size="9" 
+        font-weight="400" 
+        fill="#ffffff" 
+        text-anchor="middle" 
+        letter-spacing="3px">PERSONAL TRAINER</text>
+</svg>

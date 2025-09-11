@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FitFlow - Dashboard</title>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #764ba2;
+      --secondary: #ff7675;
+      --success: #00b894;
+      --warning: #fdcb6e;
+      --info: #74b9ff;
+      --danger: #e17055;
+      --dark: #2d3436;
+      --light: #ddd6fe;
+      --sidebar-width: 280px;
+      --header-height: 70px;
+      --workout-primary: #667eea;
+      --workout-secondary: #764ba2;
+      --workout-accent: #ff7675;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header - EXACT COPY FROM ORIGINAL */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--header-height);
+      background: white;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      z-index: 1030;
+      transition: all 0.3s ease;
+    }
+
+    .header-content {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      max-width: 100%;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: #6c757d;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      margin-right: 16px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-toggle:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: var(--primary);
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-center {
+      flex: 1;
+      max-width: 600px;
+      margin: 0 20px;
+    }
+
+    .search-container {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      height: 42px;
+      padding: 0 45px 0 40px;
+      border: 2px solid #e9ecef;
+      border-radius: 21px;
+      background: #f8f9fa;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background: white;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #6c757d;
+      font-size: 16px;
+    }
+
+    .search-clear {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #6c757d;
+      font-size: 16px;
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-input:not(:placeholder-shown) + .search-icon + .search-clear {
+      opacity: 1;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .header-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: #f8f9fa;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6c757d;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .header-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 18px;
+      height: 18px;
+      background: var(--danger);
+      border-radius: 50%;
+      font-size: 10px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+    }
+
+    .profile-section {
+      position: relative;
+      margin-left: 8px;
+    }
+
+    .profile-trigger {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      white-space: nowrap;
+    }
+
+    .profile-trigger:hover {
+      background: rgba(102, 126, 234, 0.1);
+      color: inherit;
+    }
+
+    .profile-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      border: 2px solid rgba(102, 126, 234, 0.2);
+      flex-shrink: 0;
+    }
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-width: 0;
+    }
+
+    .profile-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-status {
+      font-size: 11px;
+      color: #6c757d;
+      line-height: 1;
+      margin: 2px 0 0 0;
+      white-space: nowrap;
+    }
+
+    .profile-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      padding: 16px 0;
+      margin-top: 8px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1050;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .dropdown-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 8px;
+    }
+
+    .dropdown-item-custom {
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown-item-custom:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .dropdown-item-custom i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 16px;
+    }
+
+    /* Sidebar - EXACT COPY FROM ORIGINAL */
+    .sidebar {
+      position: fixed;
+      top: var(--header-height);
+      left: 0;
+      width: var(--sidebar-width);
+      height: calc(100vh - var(--header-height));
+      background: white;
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      z-index: 1020;
+      transition: all 0.3s ease;
+      transform: translateX(0);
+    }
+
+    .sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-content {
+      padding: 24px 0;
+    }
+
+    .sidebar-section {
+      margin-bottom: 32px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #6c757d;
+      margin-bottom: 12px;
+      padding: 0 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 24px;
+      color: #495057;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .sidebar-item:hover {
+      background: rgba(102, 126, 234, 0.05);
+      color: var(--primary);
+    }
+
+    .sidebar-item.active {
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.1), transparent);
+      color: var(--primary);
+      border-right: 3px solid var(--primary);
+    }
+
+    .sidebar-item i {
+      width: 20px;
+      margin-right: 12px;
+      font-size: 18px;
+    }
+
+    .sidebar-item .badge {
+      margin-left: auto;
+      background: var(--primary);
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      margin-top: var(--header-height);
+      padding: 24px;
+      transition: all 0.3s ease;
+      min-height: calc(100vh - var(--header-height));
+    }
+
+    .main-content.expanded {
+      margin-left: 0;
+    }
+
+    .sidebar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1010;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Dashboard Specific Styles */
+    .dashboard-header {
+      margin-bottom: 2rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: #6c757d;
+      margin-bottom: 2rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: white;
+    }
+
+    .stat-icon.primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+
+    .stat-icon.success {
+      background: linear-gradient(135deg, var(--success), #00a085);
+    }
+
+    .stat-icon.warning {
+      background: linear-gradient(135deg, var(--warning), #e17055);
+    }
+
+    .stat-icon.info {
+      background: linear-gradient(135deg, var(--info), #0984e3);
+    }
+
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-change {
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .stat-change.positive {
+      color: var(--success);
+    }
+
+    .stat-change.negative {
+      color: var(--danger);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .dashboard-card {
+      background: white;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+    }
+
+    .card-action {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card-action:hover {
+      color: var(--primary-dark);
+    }
+
+    .workout-item {
+      display: flex;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+    }
+
+    .workout-item:last-child {
+      border-bottom: none;
+    }
+
+    .workout-item:hover {
+      background: rgba(102, 126, 234, 0.02);
+      border-radius: 8px;
+      margin: 0 -0.5rem;
+      padding: 1rem 0.5rem;
+    }
+
+    .workout-thumbnail {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      object-fit: cover;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .workout-info {
+      flex: 1;
+    }
+
+    .workout-name {
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.25rem;
+    }
+
+    .workout-meta {
+      font-size: 0.8rem;
+      color: #6c757d;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .workout-status {
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .workout-status.completed {
+      background: rgba(0, 184, 148, 0.1);
+      color: var(--success);
+    }
+
+    .workout-status.pending {
+      background: rgba(253, 203, 110, 0.1);
+      color: var(--warning);
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      font-size: 16px;
+      color: white;
+    }
+
+    .activity-icon.workout {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+
+    .activity-icon.nutrition {
+      background: linear-gradient(135deg, var(--success), #00a085);
+    }
+
+    .activity-icon.achievement {
+      background: linear-gradient(135deg, var(--warning), #e17055);
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-text {
+      color: #333;
+      margin-bottom: 0.25rem;
+      font-size: 0.9rem;
+    }
+
+    .activity-time {
+      color: #6c757d;
+      font-size: 0.8rem;
+    }
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .action-btn {
+      background: white;
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .action-btn:hover {
+      border-color: var(--primary);
+      background: rgba(102, 126, 234, 0.02);
+      color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .action-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 24px;
+      color: white;
+    }
+
+    .action-title {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .action-description {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .sidebar {
+        transform: translateX(-100%);
+        z-index: 1021;
+      }
+      
+      .sidebar.show {
+        transform: translateX(0);
+      }
+      
+      .main-content {
+        margin-left: 0;
+      }
+      
+      .profile-info {
+        display: none;
+      }
+      
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .brand-logo span {
+        display: none;
+      }
+      
+      .header-center {
+        max-width: 200px;
+        margin: 0 12px;
+      }
+      
+      .main-content {
+        padding: 16px;
+      }
+      
+      .page-title {
+        font-size: 2rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .header-content {
+        padding: 0 12px;
+      }
+      
+      .search-input {
+        height: 38px;
+        font-size: 13px;
+      }
+      
+      .header-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+      }
+      
+      .sidebar-toggle {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+      }
+      
+      .profile-avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="header-content">
+      <div class="header-left">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+        
+        <a href="#" class="brand-logo">
+          <div class="brand-icon">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <span>FitFlow</span>
+        </a>
+      </div>
+      
+      <div class="header-center">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Caută antrenamente..." id="searchInput">
+          <i class="bi bi-search search-icon"></i>
+          <button class="search-clear" onclick="clearSearch()">
+            <i class="bi bi-x"></i>
+          </button>
+        </div>
+      </div>
+      
+      <div class="header-right">
+        <button class="header-btn" onclick="showNotifications()">
+          <i class="bi bi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        
+        <button class="header-btn d-none d-md-flex">
+          <i class="bi bi-chat-dots"></i>
+          <span class="notification-badge">5</span>
+        </button>
+        
+        <button class="header-btn d-none d-lg-flex">
+          <i class="bi bi-gear"></i>
+        </button>
+        
+        <div class="profile-section">
+          <div class="profile-trigger" onclick="toggleProfileDropdown()">
+            <div class="profile-avatar">MC</div>
+            <div class="profile-info d-none d-md-block">
+              <div class="profile-name">Maria Cristina</div>
+              <div class="profile-status">Online</div>
+            </div>
+            <i class="bi bi-chevron-down d-none d-md-inline ms-1"></i>
+          </div>
+          
+          <div class="profile-dropdown" id="profileDropdown">
+            <div class="dropdown-header">
+              <div class="d-flex align-items-center">
+                <div class="profile-avatar me-3" style="width: 50px; height: 50px; font-size: 16px;">MC</div>
+                <div>
+                  <h6 class="mb-1">Maria Cristina</h6>
+                  <small class="text-muted">maria.cristina@email.com</small>
+                  <br>
+                  <small class="badge bg-primary">Premium Member</small>
+                </div>
+              </div>
+            </div>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-person-circle"></i>
+              Profilul Meu
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-graph-up-arrow"></i>
+              Statistici & Progres
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-trophy"></i>
+              Realizări & Insigna
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-heart-pulse"></i>
+              Monitorizare Sănătate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-gear"></i>
+              Setări Cont
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-question-circle"></i>
+              Ajutor & Suport
+            </a>
+            
+            <a href="#" class="dropdown-item-custom">
+              <i class="bi bi-shield-check"></i>
+              Securitate
+            </a>
+            
+            <hr class="my-2">
+            
+            <a href="#" class="dropdown-item-custom text-danger">
+              <i class="bi bi-box-arrow-right"></i>
+              Deconectare
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-content">
+      <!-- Main Navigation -->
+      <div class="sidebar-section">
+        <div class="sidebar-title">Navigare Principală</div>
+        
+        <a href="index.html" class="sidebar-item active">
+          <i class="bi bi-house-fill"></i>
+          Dashboard
+        </a>
+        
+        <a href="antrenamente_list.html" class="sidebar-item">
+          <i class="bi bi-lightning-charge"></i>
+          Antrenamente
+          <span class="badge">12</span>
+        </a>
+        
+
+        <a href="retete_list.html" class="sidebar-item">
+          <i class="bi bi-apple"></i>
+          Nutriție
+          <span class="badge">New</span>
+        </a>
+        <a href="suplimente.html" class="sidebar-item">
+          <i class="bi bi-capsule"></i>
+          Suplimente
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sidebar Overlay for Mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+  <!-- Main Content -->
+  <main class="main-content" id="mainContent">
+    <div class="dashboard-header">
+      <h1 class="page-title">Bună ziua, Natașa! 👋</h1>
+      <p class="page-subtitle">Iată o prezentare generală a progresului tău de fitness de astăzi</p>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon primary">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+        </div>
+        <div class="stat-value">847</div>
+        <div class="stat-label">Calorii Arse</div>
+        <div class="stat-change positive">
+          <i class="bi bi-arrow-up"></i>
+          +12% față de ieri
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon success">
+            <i class="bi bi-trophy-fill"></i>
+          </div>
+        </div>
+        <div class="stat-value">15</div>
+        <div class="stat-label">Antrenamente Completate</div>
+        <div class="stat-change positive">
+          <i class="bi bi-arrow-up"></i>
+          +3 săptămâna aceasta
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon warning">
+            <i class="bi bi-clock-fill"></i>
+          </div>
+        </div>
+        <div class="stat-value">4.2h</div>
+        <div class="stat-label">Timp Activ Astăzi</div>
+        <div class="stat-change positive">
+          <i class="bi bi-arrow-up"></i>
+          +30min față de media
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon info">
+            <i class="bi bi-heart-pulse-fill"></i>
+          </div>
+        </div>
+        <div class="stat-value">142</div>
+        <div class="stat-label">Puls Mediu (bpm)</div>
+        <div class="stat-change negative">
+          <i class="bi bi-arrow-down"></i>
+          -5 bpm față de ieri
+        </div>
+      </div>
+    </div>
+
+    <!-- Dashboard Grid -->
+    <div class="dashboard-grid">
+      <!-- Recent Workouts -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">Antrenamente Recente</h3>
+          <button class="card-action">Vezi toate</button>
+        </div>
+        
+        <div class="workout-item">
+          <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workout" class="workout-thumbnail">
+          <div class="workout-info">
+            <div class="workout-name">Antrenament - Picioare</div>
+            <div class="workout-meta">
+              <span>45 min</span>
+              <span>350 kcal</span>
+              <span>Intermediar</span>
+            </div>
+          </div>
+          <div class="workout-status completed">Completat</div>
+        </div>
+
+        <div class="workout-item">
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workout" class="workout-thumbnail">
+          <div class="workout-info">
+            <div class="workout-name">Antrenament - Abdomen, Core</div>
+            <div class="workout-meta">
+              <span>30 min</span>
+              <span>280 kcal</span>
+              <span>Avansat</span>
+            </div>
+          </div>
+          <div class="workout-status completed">Completat</div>
+        </div>
+
+        <div class="workout-item">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Workout" class="workout-thumbnail">
+          <div class="workout-info">
+            <div class="workout-name">Antrenament - Spate, Biceps</div>
+            <div class="workout-meta">
+              <span>50 min</span>
+              <span>400 kcal</span>
+              <span>Intermediar</span>
+            </div>
+          </div>
+          <div class="workout-status pending">Programat</div>
+        </div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h3 class="card-title">Activitate Recentă</h3>
+          <button class="card-action">Vezi istoric</button>
+        </div>
+        
+        <div class="activity-item">
+          <div class="activity-icon workout">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">Ai completat antrenamentul pentru picioare</div>
+            <div class="activity-time">Acum 2 ore</div>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon achievement">
+            <i class="bi bi-trophy-fill"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">Ai câștigat insigna "7 zile consecutive"</div>
+            <div class="activity-time">Ieri</div>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon nutrition">
+            <i class="bi bi-apple"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">Ai adăugat o nouă rețetă sănătoasă</div>
+            <div class="activity-time">Acum 2 zile</div>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon workout">
+            <i class="bi bi-lightning-charge-fill"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-text">Ai completat antrenamentul pentru abdomen</div>
+            <div class="activity-time">Acum 3 zile</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+      <a href="#" class="action-btn">
+        <div class="action-icon">
+          <i class="bi bi-play-fill"></i>
+        </div>
+        <div class="action-title">Începe Antrenament</div>
+        <div class="action-description">Alege un antrenament și începe acum</div>
+      </a>
+
+      <a href="#" class="action-btn">
+        <div class="action-icon">
+          <i class="bi bi-calendar-plus"></i>
+        </div>
+        <div class="action-title">Programează Sesiune</div>
+        <div class="action-description">Planifică antrenamentele tale</div>
+      </a>
+
+      <a href="#" class="action-btn">
+        <div class="action-icon">
+          <i class="bi bi-graph-up-arrow"></i>
+        </div>
+        <div class="action-title">Vezi Progresul</div>
+        <div class="action-description">Analizează statisticile tale</div>
+      </a>
+
+      <a href="#" class="action-btn">
+        <div class="action-icon">
+          <i class="bi bi-apple"></i>
+        </div>
+        <div class="action-title">Plan Nutrițional</div>
+        <div class="action-description">Explorează rețete sănătoase</div>
+      </a>
+    </div>
+  </main>
+
+  <script>
+    // Sidebar functionality
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      if (window.innerWidth <= 992) {
+        sidebar.classList.toggle('show');
+        overlay.classList.toggle('show');
+      } else {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+      }
+    }
+
+    function closeSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      sidebar.classList.remove('show');
+      overlay.classList.remove('show');
+    }
+
+    // Profile dropdown functionality
+    function toggleProfileDropdown() {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('show');
+    }
+
+    // Search functionality
+    function clearSearch() {
+      const searchInput = document.getElementById('searchInput');
+      searchInput.value = '';
+      searchInput.focus();
+    }
+
+    // Notifications
+    function showNotifications() {
+      // Implement notifications functionality
+      console.log('Show notifications');
+    }
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+      const profileSection = document.querySelector('.profile-section');
+      const profileDropdown = document.getElementById('profileDropdown');
+      
+      if (!profileSection.contains(event.target)) {
+        profileDropdown.classList.remove('show');
+      }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', function() {
+      const sidebar = document.getElementById('sidebar');
+      const mainContent = document.getElementById('mainContent');
+      const overlay = document.getElementById('sidebarOverlay');
+      
+      if (window.innerWidth > 992) {
+        sidebar.classList.remove('show');
+        overlay.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>
