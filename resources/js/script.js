@@ -363,27 +363,28 @@
 
 
 	
-	// Main Slider
+	// Main Slider - Responsive behavior
 	var slider = new Swiper('.main-slider', {
 		slidesPerView: 1,
 		spaceBetween: 0,
-		loop: true,
+		loop: window.innerWidth > 768, // Only loop on desktop
 		autoplay: {
-			enabled: true,
+			enabled: window.innerWidth > 768, // Only autoplay on desktop
 			delay: 6000
 		},
 		// Navigation arrows
 		navigation: {
-			nextEl: '.main-slider-next',
-			prevEl: '.main-slider-prev',
-			clickable: true,
+			nextEl: window.innerWidth > 768 ? '.main-slider-next' : null,
+			prevEl: window.innerWidth > 768 ? '.main-slider-prev' : null,
+			clickable: window.innerWidth > 768,
 		},
 		//Pagination
 		pagination: {
-			el: ".swiper-pagination",
-			clickable: true,
+			el: window.innerWidth > 768 ? ".swiper-pagination" : null,
+			clickable: window.innerWidth > 768,
 		},
 		speed: 500,
+		allowTouchMove: window.innerWidth > 768, // Disable touch on mobile
 		breakpoints: {
 			'1600': {
 				slidesPerView: 1,
@@ -406,7 +407,22 @@
 		},
 	});
 
-
+	// Handle window resize for responsive slider behavior
+	window.addEventListener('resize', function() {
+		if (slider) {
+			if (window.innerWidth <= 768) {
+				// Mobile: disable carousel features
+				slider.autoplay.stop();
+				slider.allowTouchMove = false;
+				slider.loop = false;
+			} else {
+				// Desktop: enable carousel features
+				slider.autoplay.start();
+				slider.allowTouchMove = true;
+				slider.loop = true;
+			}
+		}
+	});
 
 	// Single One Slider
 	var slider = new Swiper('.single-item_carousel', {
