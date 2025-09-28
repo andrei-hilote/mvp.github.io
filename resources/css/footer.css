@@ -1,0 +1,202 @@
+/* GymFit Gym Business HTML-5 Template */
+
+/*** 
+
+====================================================================
+	Main Footer
+====================================================================
+
+***/
+
+.main-footer{
+	position:relative;
+}
+
+.main-footer .widgets-section{
+	position: relative;
+	padding: 100px 0px 70px;
+}
+
+.footer-widget{
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.footer-logo{
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.main-footer_image{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	background-size: cover;
+}
+
+.footer-text{
+	position: relative;
+	font-size: 16px;
+	max-width: 280px;
+	line-height: 30px;
+	color: var(--white-color);
+}
+
+.footer-social_box{
+	position: relative;
+	margin-top: 30px;
+}
+
+.footer-social_box a{
+	position: relative;
+	width: 44px;
+	height: 44px;
+	font-size: 18px;
+	line-height: 44px;
+	text-align: center;
+	margin-right: 8px;
+	display: inline-block;
+	color: var(--color-two);
+	background-color: var(--white-color);
+}
+
+.footer-social_box a:hover{
+	color: var(--white-color);
+	background-color: var(--main-color);
+}
+
+.footer-title{
+	position: relative;
+	padding-left: 40px;
+	margin-bottom: 20px;
+	display: inline-block;
+	color: var(--white-color);
+	font-family: 'Russo One', sans-serif;
+}
+
+.footer-title::before{
+	position: absolute;
+	content: '//';
+	left: 0px;
+	top: 0px;
+}
+
+.contact-text{
+	position: relative;
+	font-size: 18px;
+	line-height: 30px;
+	max-width: 300px;
+	margin-bottom: 40px;
+	color: var(--color-nine);
+}
+
+.footer-contact_list{
+	position: relative;
+}
+
+.footer-contact_list li{
+	position: relative;
+	font-size: 16px;
+	margin-bottom: 12px;
+	color: var(--color-nine);
+}
+
+.footer-contact_list li a{
+	position: relative;
+	color: var(--color-nine);
+}
+
+.footer-contact_list li a:hover{
+	color: var(--main-color);
+}
+
+
+
+.footer-timing_list{
+	position: relative;
+}
+
+.footer-timing_list li{
+	position: relative;
+	font-size: 18px;
+	margin-bottom: 15px;
+	color: var(--color-nine);
+}
+
+.footer-timing_list li span{
+	position: absolute;
+	right: 0px;
+}
+
+/* Footer Bottom */
+
+.footer-bottom{
+	position: relative;
+	padding: 25px 0px;
+	text-align: center;
+	border-top: 1px solid rgba(var(--white-color-rgb), 0.20);
+}
+
+.main-footer_copyright{
+	position: relative;
+	font-size: 18px;
+	color: var(--white-color);
+}
+
+/* Footer List */
+
+.footer-list{
+	position: relative;
+}
+
+.footer-list li{
+	position: relative;
+	margin-bottom: 12px;
+}
+
+.footer-list li a{
+	position: relative;
+	font-size: 16px;
+	color: var(--color-nine);
+	text-transform: capitalize;
+}
+
+.footer-list li a:hover{
+	color: var(--main-color);
+}
+
+.main-footer.style-two .footer-title{
+	font-size: 24px;
+	color: var(--main-color);
+}
+
+
+.main-footer.style-three .footer-title{
+	font-size: 24px;
+	color: var(--white-color);
+}
+
+.main-footer.style-three .links-widget{
+	margin-left: 30px;
+}
+
+.main-footer.style-three .footer-list li{
+	margin-bottom: 15px;
+}
+
+.main-footer.style-three .contact-widget{
+	position: relative;
+	padding: 0px 55px 50px;
+}
+
+.main-footer.style-three .contact-widget::before{
+	position: absolute;
+	content: '';
+	left: 0px;
+	top: -100px;
+	right: 0px;
+	bottom: 0px;
+	background-color: var(--color-eighteen);
+}

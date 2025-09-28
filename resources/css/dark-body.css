@@ -1,0 +1,216 @@
+/* GymFit Gym Business HTML-5 Template */
+
+
+/* Want Sticky Header */
+
+.want-sticky-header .main-header .sticky-header{
+	position:relative;
+	display:none;
+}
+
+/* Dark Version Style CSS Code */
+
+.dark-body,
+.dark-body .reply-comment,
+.dark-body .program-one_subtitle{
+	background-color: #0b0b0b;
+}
+
+.dark-body .service-block_two-inner,
+.dark-body .sidebar .newsletter-form .form-group input[type="text"],
+.dark-body .sidebar .newsletter-form .form-group input[type="email"]{
+	color: #ffffff;
+	background-color: #222222;
+}
+
+.dark-body .cart-total-box,
+.dark-body .comments-area,
+.dark-body .register-one .form-column .inner-column,
+.dark-body .shipping-outer .cart-shipping-box,
+.dark-body .sidebar-widget .widget-content{
+	background-color: #222222;
+}
+
+.dark-body .program-one{
+	background-image: inherit !important;
+	background-color: #222222;
+}
+
+.dark-body .cart-table thead tr th,
+.dark-body .cart-table .prod-title,
+.dark-body .cart-table tbody tr td.price,
+.dark-body .cart-table .prod-text,
+.dark-body .cart-totals li,
+.dark-body .shipping-list li,
+.dark-body .cart-table tbody tr td.sub-total,
+.dark-body .shoping-cart-section .check-box label,
+.dark-body .shoping-cart-section .total-column .title-box h6,
+.dark-body .prod-tabs .tabs-content .tab .title,
+.dark-body .comment-box .comment .rating,
+.dark-body .comment-box .comment-info,
+.dark-body .service-block_two-heading,
+.dark-body .program-one_heading a,
+.dark-body .order-totals li,
+.dark-body .register-one h3,
+.dark-body .contact-info_block h4,
+.dark-body .shipping-form .check-box label,
+.dark-body .order-box .order-total,
+.dark-body .sec-title_heading{
+	color: #ffffff;
+}
+
+.dark-body .contact-info_block-inner a,
+.dark-body .contact-info_block-inner p,
+.dark-body .error-section h1,
+.dark-body .shop-detail_title,
+.dark-body .shop-detail_rating i,
+.dark-body .shop-detail_rating .fa-star.light,
+.dark-body .shop-detail_text,
+.dark-body .shop-detail_socials .share,
+.dark-body .comment-box .text,
+.dark-body .shop-detail_list li span,
+.dark-body .shop-detail_list li,
+.dark-body .shop-cat li a,
+.dark-body .quantity-box .item-quantity input.qty-spinner,
+.dark-body .quantity-box .bootstrap-touchspin .glyphicon-chevron-down:before,
+.dark-body .quantity-box .bootstrap-touchspin .glyphicon-chevron-up:before,
+.dark-body .shop-section .lower-text .products,
+.dark-body .sidebar .related-posts .post h4 a,
+.dark-body .sidebar .related-posts .post .price,
+.dark-body .shop-item .inner-box .lower-content h3 a,
+.dark-body .shop-item .inner-box .lower-content .price,
+.dark-body .shop-item .inner-box .lower-content .cart,
+.dark-body .service-detail_heading,
+.dark-body .team-detail_heading,
+.dark-body .privacy-section h4,
+.dark-body .privacy-section .privacy-list li,
+.dark-body .privacy-section h4,
+.dark-body .trainer-form_text,
+.dark-body .trainer-form_title,
+.dark-body .privacy-section h3,
+.dark-body .bodybuilder-options .posts li a,
+.dark-body .trainer-contact_form .form-group .data,
+.dark-body .sidebar .newsletter-widget .text,
+.dark-body .bodybuilder-detail .inner-box .blockquote,
+.dark-body .bodybuilder-options .social-box .share,
+.dark-body .bodybuilder-options .social-box a,
+.dark-body .gym-detail_list li,
+.dark-body .skills .count-box,
+.dark-body .sidebar-title h4,
+.dark-body .category-list li a,
+.dark-body .post-widget .post h6 a,
+.dark-body .team-detail-contact,
+.dark-body .related-products h3,
+.dark-body .certificate-block_inner,
+.dark-body .team-detail-contact a,
+.dark-body .portfolio-detail_heading,
+.dark-body .portfolio-detail_info,
+.dark-body .checkout-section h4,
+.dark-body .portfolio-detail_list li,
+.dark-body .certificate-block strong,
+.dark-body .blog-detail_subheading,
+.dark-body .review-author_box h5,
+.dark-body .review-author_box-text,
+.dark-body .review-author_box-date,
+.dark-body .contact-form .form-group label,
+.dark-body .contact-form .form-group .check-box label,
+.dark-body .shop-section .items-sorting .total-items,
+.dark-body .skills .skill-item .skill-header .skill-title,
+.dark-body .trainer-detail .inner-box .post-share-options .social-box a,
+.dark-body .trainer-detail .inner-box .post-share-options .social-box .share,
+.dark-body .trainer-detail .inner-box .blockquote,
+.dark-body .counter-block_one-count,
+.dark-body .about-one_phone a,
+.dark-body .about-one_phone .icon,
+.dark-body .about-one_list li a{
+	color: #ffffff;
+}
+
+.dark-body .contact-form .text,
+.dark-body .portfolio-detail p,
+.dark-body .popular-tags a,
+.dark-body .service-detail p,
+.dark-body .team-detail p,
+.dark-body .prod-tabs .tabs-content p,
+.dark-body .privacy-section p,
+.dark-body .bodybuilder-detail .inner-box p,
+.dark-body .testimonial-two_quote-left,
+.dark-body .testimonial-two_quote-right,
+.dark-body .testimonial-block_two-text,
+.dark-body .trainer-detail .inner-box p,
+.dark-body .post-widget .post .post-date,
+.dark-body .contact-form_rating strong,
+.dark-body .trainer-detail .inner-box .title-box h3,
+.dark-body .trainer-detail .inner-box .title-box .category,
+.dark-body .accordion-box .block .content .text,
+.dark-body .calculate-section .info-column .table-outer .info-list span,
+.dark-body .calculate-section .info-column .table-outer .table-boxed ul li,
+.dark-body .sec-title_text{
+	opacity: 0.80;
+	color: #ffffff;
+}
+
+.dark-body .styled-pagination li a,
+.dark-body .team-one_next-arrow,
+.dark-body .team-one_prev-arrow{
+	color: #ffffff;
+	border-color: #ffffff;
+}
+
+.dark-body .portfolio-detail_list li::before,
+.dark-body .about-one_list.style-two li a::before{
+	background-color: #ffffff;
+}
+
+.dark-body .clients-one .client-image img{
+	filter: grayscale(100%);
+}
+
+.dark-body .sidebar-title_two h5,
+.dark-body .calculate-section .info-column .table-outer .table-boxed .table-content .title .col:last-child,
+.dark-body .calculate-section .info-column .table-outer .table-boxed .table-content .title .col:first-child{
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.10);
+}
+
+.dark-body .cart-table tbody tr,
+.dark-body .cart-total-box,
+.dark-body .item-quantity,
+.dark-body .review-author_box,
+.dark-body .order-totals li,
+.dark-body .cart-totals li,
+.dark-body .shipping-list li,
+.dark-body .trainer-detail .inner-box,
+.dark-body .shipping-outer .cart-shipping-box,
+.dark-body .register-one .form-column .inner-column,
+.dark-body .privacy-section .privacy-content,
+.dark-body .shop-detail .prod-tabs .tab-btns::before,
+.dark-body .trainer-detail .inner-box .title-box .category,
+.dark-body .cart-table tbody tr .prod-column .column-box .prod-thumb,
+.dark-body .calculate-section .info-column .table-outer .table-boxed ul li,
+.dark-body .calculate-section .info-column .table-outer .table-boxed .table-content{
+	border-color: rgba(255, 255, 255, 0.10);
+}
+
+.dark-body .calculate-section .info-column .table-outer .table-boxed ul li span:before{
+	opacity: 0.15;
+	background-color: #ffffff;
+}
+
+.dark-body .shop-detail_socials li a,
+.dark-body .sidebar .search-box .form-group input[type="text"],
+.dark-body .sidebar .search-box .form-group input[type="search"]{
+	color: #ffffff;
+	border-color: rgba(255, 255, 255, 0.10);
+}
+
+.dark-body .sidebar .search-box .form-group input::placeholder,
+.dark-body .sidebar .search-box .form-group textarea::placeholder{
+	color:#ffffff;
+	opacity: 0.50;
+}
+
+.dark-body .sidebar .search-box .form-group button{
+	color: #0b0b0b;
+	background-color: #ffffff;
+}

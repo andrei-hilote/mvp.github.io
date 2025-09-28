@@ -1,0 +1,786 @@
+/* GymFit Gym Business HTML-5 Template */
+ 
+/* RTL Style CSS Code */
+
+.rtl .row,
+.rtl .d-flex{
+	flex-direction: row-reverse;
+}
+
+.rtl .main-menu .navigation > li{
+	float:right;
+}
+
+.rtl .sticky-header .logo{
+	float:right;
+	padding-left:25px;
+}
+
+.rtl .main-menu{
+	text-align:right;
+}
+
+.rtl .main-header .main-menu .navigation > li > ul > li > ul > li,
+.rtl .main-header .main-menu .navigation > li > ul > li,
+.rtl .main-menu .navigation > li > ul > li{
+	text-align:right;
+}
+
+.rtl .main-header .main-menu .navigation > li > ul{
+	padding:20px 25px 20px 25px;
+}
+
+.rtl .main-header .main-menu .navigation > li > ul > li > a:before{
+	right:0px;
+	left:auto;
+	opacity: 0;
+}
+
+.rtl .main-menu .navigation > li > ul > li:hover > a{
+	padding-left:0px !important;
+	padding-right:30px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > a:before{
+	left:auto;
+	right:8px;
+}
+
+.rtl .main-menu .navigation > li > ul > li.dropdown > a:after{
+	right:auto;
+	left:10px;
+	transform:rotate(180deg);
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul{
+	left:auto;
+	right:100%;
+}
+
+.rtl .main-menu .navigation li > ul > li.dropdown:hover > ul{
+	
+}
+
+.rtl .main-header .main-menu .navigation > li > ul > li > ul{
+	right:100%;
+	left:auto;
+}
+
+.rtl .main-menu .navigation > li > ul{
+	left:auto;
+	right:0px;
+}
+
+.rtl .main-menu .navigation > li.dropdown:hover > ul{
+	left:auto;
+	right:0px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li:hover > a{
+	padding-left:0px;
+	padding-right:30px;
+}
+
+.rtl .main-menu .navigation > li > ul > li > ul > li > a:before{
+	left:auto;
+	right:8px;
+	opacity: 0;
+}
+
+.rtl .main-header .main-menu .navigation > li:first-child{
+	margin-right: 0px;
+}
+
+.rtl .main-header .main-menu .navigation > li:last-child{
+	margin-right: 25px;
+}
+
+.rtl .search-popup .form-group input[type="text"],
+.rtl .search-popup .form-group input[type="search"]{
+	text-align: right;
+}
+
+.rtl .about-sidebar .content-box,
+.rtl .search-popup .form-group input[type="submit"],
+.rtl .search-popup .form-group button{
+	text-align: right;
+}
+
+.rtl .search-popup .form-group input[type="submit"],
+.rtl .search-popup .form-group button{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .main-header .header-lower .logo-box .logo{
+	padding: 25px 0px 20px;
+}
+
+.rtl .about-widget{
+	margin-left: 0px;
+}
+
+.rtl .main-header_button{
+	margin-left: 15px;
+}
+
+.rtl .slider-one_content-inner{
+	margin-right: 0px;
+	text-align: right;
+	padding-left: 0px;
+}
+
+.rtl .about-sidebar_list li{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 30px;
+}
+
+.rtl .about-sidebar_list li::before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .about-sidebar .social-box{
+	margin-left: 0px;
+	text-align: right;
+	margin-right: 40px;
+}
+
+.rtl .about-one_content-outer,
+.rtl .about-one_image-outer{
+	text-align: right;
+}
+
+.rtl .about-one_phone{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 80px;
+}
+
+.rtl .about-one_phone .icon{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .program-one_title{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 175px;
+}
+
+.rtl .program-one_title::before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .program-one_title .number{
+	left: auto;
+	right: 40px;
+}
+
+.rtl .program-one_image.active{
+	-webkit-transform: rotate(0deg) translateX(0px);
+    transform: rotate(0deg) translateX(0px);
+}
+
+.rtl .program-one_image{
+	-webkit-transform: rotate(25deg) translateX(60px) translateY(30px);
+    transform: rotate(25deg) translateX(60px) translateY(30px);
+}
+
+.rtl .sec-title,
+.rtl .cta-one_content,
+.rtl .counter-block_one-inner,
+.rtl .team-block_one-content,
+.rtl .program-one_content-outer{
+	text-align: right;
+}
+
+.rtl .team-one-arrows{
+	left: 20px;
+	right: auto;
+}
+
+.rtl .team-block_one-socials{
+	left: 3px;
+	right: auto;
+}
+
+.rtl .testimonial-one-arrows{
+	left: 15px;
+	right: auto;
+}
+
+.rtl .main-footer,
+.rtl .classes-block_one-content,
+.rtl .news-block_one-content,
+.rtl .cta-two .inner-container,
+.rtl .testimonial-block_one-content,
+.rtl .language-dropdown .dropdown-menu .dropdown-item{
+	text-align: right;
+}
+
+.rtl .testimonial-block_one-quote{
+	left: 30px;
+	right: auto;
+}
+
+.rtl .testimonial-one .sec-title{
+	margin-left: 0px;
+	margin-right: 325px;
+}
+
+.rtl .footer-text,
+.rtl .contact-text{
+	max-width: 100%;
+}
+
+.rtl .footer-timing_list li span{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .header-phone_box{
+	text-align: right;
+	margin-left: 20px;
+	flex-direction: row-reverse;
+}
+
+.rtl .cta-two_list li,
+.rtl .header-top_list li{
+	flex-direction: row-reverse;
+}
+
+.rtl .language-dropdown{
+	margin-left: 20px;
+}
+
+.rtl .slider-two_content{
+	text-align: right;
+	flex-direction: inherit;
+}
+
+.rtl .slider-two_video .play-box .fa{
+	float: right;
+}
+
+.rtl .slider-two_video .play-box i{
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+.rtl .about-two_year{
+	left: 0px;
+	font-size: 20px;
+}
+
+.rtl .price-block_one-inner{
+	text-align: right;
+	padding-right: 30px;
+}
+
+.rtl .price-block_one-price{
+	margin-right: -30px;
+	padding-right: 25px;
+}
+
+.rtl .price-block_one-list li{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 20px;
+}
+
+.rtl .price-block_one-list li:before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .about-one_image-color,
+.rtl .choose-one_color-one{
+	display: none;
+}
+
+.rtl .news-block_two-content,
+.rtl .choose-one_content-outer{
+	text-align: right;
+}
+
+.rtl .choose-one_list li{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 25px;
+}
+
+.rtl .choose-one_list li:before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .news-block_two-heading{
+	max-width: 100%;
+}
+
+.rtl .gym-detail_list li,
+.rtl .slider-three_content{
+	display: flex;
+	text-align: right;
+	justify-content: end;
+}
+
+.rtl .privacy-section,
+.rtl .accordion-box,
+.rtl .contact-form,
+.rtl .bodybuilder-detail,
+.rtl .contact-form .form-group input[type="text"],
+.rtl .contact-form .form-group input[type="password"],
+.rtl .contact-form .form-group input[type="tel"],
+.rtl .contact-form .form-group input[type="email"],
+.rtl .contact-form .form-group select,
+.rtl .contact-form .form-group textarea,
+.rtl .calculate-section .info-column .table-outer,
+.rtl .service-block_one-heading,
+.rtl .service-block_one-content{
+	text-align: right;
+}
+
+.rtl .about-one .sec-title_text{
+	max-width: 100%;
+}
+
+.rtl .calculate-section .info-column .table-outer .table-boxed .table-content .title .col:first-child{
+	border-right: 0px;
+}
+
+.rtl .calculate-section .info-column .table-outer .table-boxed ul li span:before{
+	display: none;
+}
+
+.rtl .accordion-box .block .icon-outer{
+	left: 12px;
+	right: auto;
+}
+
+.rtl .shop-cat,
+.rtl .sidebar-widget,
+.rtl .service-detail,
+.rtl .sidebar-title_two,
+.rtl .trainer-detail,
+.rtl .portfolio-detail,
+.rtl .sidebar-widget_two,
+.rtl .shop-item .inner-box .lower-content,
+.rtl .sidebar .newsletter-widget .text,
+.rtl .login-dropdown .dropdown-menu .dropdown-item,
+.rtl .news-block_three-content{
+	text-align: right;
+}
+
+.rtl .sidebar .search-box .form-group input[type="text"],
+.rtl .sidebar .search-box .form-group input[type="search"]{
+	text-align: right;
+	padding-right: 20px;
+}
+
+.rtl .news-block_three-title::before{
+	right: 0px;
+}
+
+.rtl .header-top_list li:last-child{
+	margin-right: 15px;
+}
+
+.rtl .about-one_image-two{
+	right: auto;
+	left: 15px;
+}
+
+.rtl .sidebar .newsletter-form .form-group input[type="text"],
+.rtl .sidebar .newsletter-form .form-group input[type="email"]{
+	padding-right: 15px;
+	text-align: right;
+}
+
+.rtl .sidebar .newsletter-form .form-group button{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .privacy-section .privacy-list li{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 25px;
+}
+
+.rtl .privacy-section .privacy-list li:before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .team-detail_content-inner{
+	padding-left: 0px;
+	text-align: right;
+}
+
+.rtl .certificate-block_inner{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 60px;
+}
+
+.rtl .certificate-block_number{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .sidebar .search-box .form-group button{
+	left: 5px;
+	right: auto;
+}
+
+.rtl .category-list li span{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .post-widget .post{
+	padding-left: 0px;
+	padding-right: 110px;
+}
+
+.rtl .post-widget .post .thumb{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .portfolio-detail_list li{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 20px;
+}
+
+.rtl .portfolio-detail_list li::before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .shop-cat li a span{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .sidebar .related-posts .post{
+	padding-left: 0px;
+	padding-right: 150px;
+}
+
+.rtl .sidebar .related-posts .post .post-thumb{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .shop-detail_content-column .inner-column{
+	padding-left: 0px;
+	text-align: right;
+}
+
+.rtl .item-quantity{
+	margin-right: 0px;
+	margin-left: 15px;
+}
+
+.rtl .cart-total-box,
+.rtl .shipping-list li,
+.rtl .shipping-outer .buttons-box,
+.rtl .checkout-section .order-column .inner-column,
+.rtl .shop-detail .prod-tabs{
+	text-align: right;
+}
+
+.rtl .comment-box .comment{
+	padding-left: 0px;
+	padding-right: 80px;
+}
+
+.rtl .comment-box .author-thumb{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .cart-totals li span{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .order-totals li span{
+	left: 25px;
+	right: auto;
+}
+
+.rtl .voucher-box .form-group{
+	padding-right: 0px;
+}
+
+.rtl .review-box,
+.rtl .register-one,
+.rtl .blog-detail_inner,
+.rtl .shipping-form .form-group input[type="text"],
+.rtl .shipping-form .form-group input[type="password"],
+.rtl .shipping-form .form-group input[type="tel"],
+.rtl .shipping-form .form-group input[type="email"],
+.rtl .shipping-form .form-group select,
+.rtl .shipping-form .form-group textarea,
+.rtl .shipping-form .form-group .ui-selectmenu-button.ui-button,
+.rtl .checkout-section .form-column .inner-column,
+.rtl .voucher-box .form-group input[type="text"],
+.rtl .voucher-box .form-group input[type="email"]{
+	text-align: right;
+}
+
+.rtl .voucher-box .form-group button{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .order-box .order-total span{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .coming-soon .emailed-form .form-group input[type="text"],
+.rtl .coming-soon .emailed-form .form-group input[type="tel"],
+.rtl .coming-soon .emailed-form .form-group input[type="email"],
+.rtl .coming-soon .emailed-form .form-group textarea{
+	text-align: right;
+	padding-right: 20px;
+}
+
+.rtl .coming-soon .emailed-form .form-group input[type="submit"],
+.rtl .coming-soon .emailed-form button{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .blockquote_author{
+	left: 30px;
+	right: auto;
+}
+
+.rtl .blog-author-post_inner{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 130px;
+}
+
+.rtl .blog-detail_author-image{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .review-author_box{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 125px;
+}
+
+.rtl .review-author_box .author-image{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .contact-info_block-inner{
+	text-align: right;
+	padding-left: 0px;
+	padding-right: 110px;
+}
+
+.rtl .contact-info_block-icon{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .price-block_two-content{
+	text-align: right;
+}
+
+.rtl .price-block_two-list li{
+	padding-left: 0px;
+	padding-right: 25px;
+}
+
+.rtl .price-block_two-list li::before{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .mobile-menu .menu-box{
+	text-align: right;
+}
+
+.rtl .main-header .mobile-menu .navigation li.dropdown .dropdown-btn{
+	left: 0px;
+	right: auto;
+}
+
+.rtl .main-header .mobile-menu .navigation li.dropdown .dropdown-btn::after{
+	right: 0px;
+	left: auto;
+}
+
+.rtl .team-detail_info-inner{
+	text-align: right;
+}
+
+.rtl .team-detail-contact{
+	flex-direction: row-reverse;
+}
+
+/* GymFit Gym Business HTML-5 Template */
+
+@media only screen and (max-width: 2000px){
+	
+	
+	
+}
+
+@media only screen and (max-width: 1750px){
+
+	
+
+}
+
+@media only screen and (max-width: 1600px){
+
+	
+
+}
+
+
+@media only screen and (max-width: 1650px){
+
+	
+
+}
+
+@media only screen and (max-width: 1550px){
+
+	
+
+}
+
+@media only screen and (max-width: 1500px){
+	
+	
+
+}
+
+@media only screen and (max-width: 1400px){
+
+	
+
+}
+
+@media only screen and (max-width: 1300px){
+
+}
+
+@media only screen and (max-width: 1240px){
+
+}
+
+@media only screen and (max-width: 1140px){
+
+	.rtl .about-one_image-two{
+		left: 0px;
+	}
+
+}
+
+@media only screen and (min-width: 768px){
+	
+}
+	
+@media only screen and (max-width: 1023px){
+
+}
+
+@media only screen and (max-width: 991px){
+
+	.rtl .main-header .mobile-nav-toggler{
+		margin-left: 0px;
+		margin-right: 15px;
+	}
+
+	.rtl .slider-one_pattern-two{
+		display: none;
+	}
+
+	.rtl .cta-one_content{
+		right: 40px;
+	}
+
+	.rtl .testimonial-one .sec-title{
+		margin-right: 0px;
+	}
+
+	.rtl .testimonial-one-arrows{
+		left: 0px;
+	}
+
+}
+
+@media only screen and (max-width: 820px){
+
+}
+
+@media only screen and (max-width: 767px){
+
+}
+
+@media only screen and (max-width: 599px){
+
+	.rtl .accordion-box .block .acc-btn{
+		padding-right: 15px;
+	}
+
+	.rtl .accordion-box .block .icon-outer{
+		left: 0px;
+	}
+
+	.rtl .blockquote_author{
+		left: 0px;
+	}
+
+	.rtl .post-share-options .social-links{
+		margin-top: 15px;
+	}
+
+	.rtl .review-author_box{
+		padding-bottom: 25px;
+	}
+
+	.rtl .blog-author-post_inner{
+		padding-right: 0px;
+	}
+
+	.rtl .blog-detail_author-image{
+		position: relative;
+	}
+
+}
+
+@media only screen and (max-width: 479px) {
+
+	.rtl .comment-box .comment,
+	.rtl .program-one_title{
+		padding-right: 0px;
+	}
+
+	.rtl .comment-box .comment-info{
+		font-size: 14px;
+	}
+
+	.rtl .review-author_box{
+		padding-right: 0px;
+	}
+
+}

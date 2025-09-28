@@ -1,0 +1,11 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+:root {
+	
+	/* #b4b269 in decimal RGB */
+  --main-color: rgb(180,178,105);
+  --main-color-rgb: 180,178,105;
+	
+}
