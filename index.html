@@ -13,12 +13,20 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <!-- Color Switcher Mockup -->
 <link href="resources/css/color-switcher-design.css" rel="stylesheet">
 
 <!-- Color Themes -->
 <link id="theme-color-file" href="resources/css/color-themes/default-color.css" rel="stylesheet">
+
+	<!-- Mobile Hero Improvements -->
+	<link href="css/mobile-hero-improvements.css" rel="stylesheet">
+	
+	<!-- Modern Hero Redesign -->
+	<link href="css/modern-hero-redesign.css" rel="stylesheet">
 
 <link rel="shortcut icon" href="resources/images/favicon.png" type="image/x-icon">
 <link rel="icon" href="resources/images/favicon.png" type="image/x-icon">
@@ -108,7 +116,13 @@
 							</span>
 
 							<!-- Mobile Navigation Toggler -->
-							<div class="mobile-nav-toggler"><span class="icon flaticon-menu-3"></span></div>
+							<div class="mobile-nav-toggler modern-mobile-menu">
+								<span class="modern-menu-icon">
+									<span class="line line-1"></span>
+									<span class="line line-2"></span>
+									<span class="line line-3"></span>
+								</span>
+							</div>
 
 						</div>
 						
@@ -132,6 +146,38 @@
 	
 	</header>
 	<!-- End Main Header -->
+	
+	<!-- Modern Hero Section (Mobile Only) -->
+	<section class="modern-hero-section" style="background-image: url('resources/images/resource/coach-2.jpg');">
+		<!-- Modern Navbar -->
+		<nav class="modern-navbar">
+			<div class="modern-navbar-container">
+				<a href="#" class="modern-navbar-logo">RALUCA</a>
+				<button class="modern-hamburger" id="modernHamburger" aria-label="Meniu">
+					<span class="modern-hamburger-line"></span>
+					<span class="modern-hamburger-line"></span>
+					<span class="modern-hamburger-line"></span>
+				</button>
+			</div>
+		</nav>
+		
+		<!-- Hero Content -->
+		<div class="modern-hero-content">
+			<div class="modern-hero-subtitle">Bun venit la</div>
+			<h1 class="modern-hero-title">Menține-ți corpul sănătos și puternic</h1>
+			<p class="modern-hero-description">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</p>
+			
+			<div class="modern-hero-buttons">
+				<a href="classes.html" class="modern-btn-primary">
+					PROGRAMELE NOASTRE
+					<svg class="modern-btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path d="M5 12h14M12 5l7 7-7 7"/>
+					</svg>
+				</a>
+				<a href="about.html" class="modern-btn-secondary">DESPRE NOI</a>
+			</div>
+		</div>
+	</section>
 	
 	<!-- About Sidebar -->
 	<div class="about-sidebar">
@@ -174,7 +220,7 @@
 
 				<!-- Slide -->
 				<div class="swiper-slide">
-					<div class="slider-one_image-layer" style="background-image:url(resources/images/main-slider/1.jpg)"></div>
+					<div class="slider-one_image-layer" style="background-image:url(resources/images/resource/coach-1.jpg)"></div>
 					<div class="slider-one_pattern" style="background-image:url(resources/images/main-slider/pattern-1.png)"></div>
 					<div class="slider-one_pattern-two" style="background-image:url(resources/images/main-slider/pattern-2.png)"></div>
 					<div class="auto-container">
@@ -182,20 +228,20 @@
 							<!-- Content Column -->
 							<div class="slider-one_content col-lg-7 col-md-12 col-sm-12">
 								<div class="slider-one_content-inner">
-                                    <div class="slider-one_title">Bun venit la </div>
-                                    <h1 class="slider-one_heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-                                    <div class="slider-one_text">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+                                    <div class="slider-one_subtitle">BUN VENIT LA</div>
+                                    <h1 class="slider-one_heading">Menține-ți corpul sănătos și puternic</h1>
+                                    <div class="slider-one_text">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 									<div class="slider-one_button d-flex align-items-center flex-wrap">
 										<a href="classes.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 										<a href="about.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 									</div>
@@ -209,12 +255,12 @@
 										
 										<!-- Main Text Over Image -->
 										<div class="wow-slider-main-text">
-											<div class="wow-slider-welcome">Bun venit la </div>
-											<h1 class="wow-slider-heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-											<div class="wow-slider-subtitle">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+											<div class="wow-slider-welcome">BUN VENIT LA</div>
+											<h1 class="wow-slider-heading">Menține-ți corpul sănătos și puternic</h1>
+											<div class="wow-slider-subtitle">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 											<div class="wow-slider-buttons">
-												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></a>
-												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></a>
 											</div>
 										</div>
 										
@@ -241,7 +287,7 @@
 
 				<!-- Slide -->
 				<div class="swiper-slide">
-					<div class="slider-one_image-layer" style="background-image:url(resources/images/main-slider/2.jpg)"></div>
+					<div class="slider-one_image-layer" style="background-image:url(resources/images/resource/coach-2.jpg)"></div>
 					<div class="slider-one_pattern" style="background-image:url(resources/images/main-slider/pattern-1.png)"></div>
 					<div class="slider-one_pattern-two" style="background-image:url(resources/images/main-slider/pattern-2.png)"></div>
 					<div class="auto-container">
@@ -249,20 +295,20 @@
 							<!-- Content Column -->
 							<div class="slider-one_content col-lg-7 col-md-12 col-sm-12">
 								<div class="slider-one_content-inner">
-                                    <div class="slider-one_title">Bun venit la </div>
-                                    <h1 class="slider-one_heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-                                    <div class="slider-one_text">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+                                    <div class="slider-one_subtitle">BUN VENIT LA</div>
+                                    <h1 class="slider-one_heading">Menține-ți corpul sănătos și puternic</h1>
+                                    <div class="slider-one_text">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 									<div class="slider-one_button d-flex align-items-center flex-wrap">
 										<a href="classes.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 										<a href="about.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 									</div>
@@ -276,12 +322,12 @@
 										
 										<!-- Main Text Over Image -->
 										<div class="wow-slider-main-text">
-											<div class="wow-slider-welcome">Bun venit la </div>
-											<h1 class="wow-slider-heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-											<div class="wow-slider-subtitle">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+											<div class="wow-slider-welcome">BUN VENIT LA</div>
+											<h1 class="wow-slider-heading">Menține-ți corpul sănătos și puternic</h1>
+											<div class="wow-slider-subtitle">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 											<div class="wow-slider-buttons">
-												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></a>
-												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></a>
 											</div>
 										</div>
 										
@@ -308,7 +354,7 @@
 
 				<!-- Slide -->
 				<div class="swiper-slide">
-					<div class="slider-one_image-layer" style="background-image:url(resources/images/main-slider/3.jpg)"></div>
+					<div class="slider-one_image-layer" style="background-image:url(resources/images/resource/coach-3.jpg)"></div>
 					<div class="slider-one_pattern" style="background-image:url(resources/images/main-slider/pattern-1.png)"></div>
 					<div class="slider-one_pattern-two" style="background-image:url(resources/images/main-slider/pattern-2.png)"></div>
 					<div class="auto-container">
@@ -316,20 +362,20 @@
 							<!-- Content Column -->
 							<div class="slider-one_content col-lg-7 col-md-12 col-sm-12">
 								<div class="slider-one_content-inner">
-                                    <div class="slider-one_title">Bun venit la </div>
-                                    <h1 class="slider-one_heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-                                    <div class="slider-one_text">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+                                    <div class="slider-one_subtitle">BUN VENIT LA</div>
+                                    <h1 class="slider-one_heading">Menține-ți corpul sănătos și puternic</h1>
+                                    <div class="slider-one_text">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 									<div class="slider-one_button d-flex align-items-center flex-wrap">
 										<a href="classes.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 										<a href="about.html" class="theme-btn btn-style-two">
 											<span class="btn-wrap">
-                                                <span class="text-one">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
-                                                <span class="text-two">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-one">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
+                                                <span class="text-two">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></span>
 											</span>
 										</a>
 									</div>
@@ -343,12 +389,12 @@
 										
 										<!-- Main Text Over Image -->
 										<div class="wow-slider-main-text">
-											<div class="wow-slider-welcome">Bun venit la </div>
-											<h1 class="wow-slider-heading">Menține Corpul <span>Sănătos & Puternic</span></h1>
-											<div class="wow-slider-subtitle">Îndeplinește-ți obiectivele de sănătate și nutriție în orice etapă a vieții.</div>
+											<div class="wow-slider-welcome">BUN VENIT LA</div>
+											<h1 class="wow-slider-heading">Menține-ți corpul sănătos și puternic</h1>
+											<div class="wow-slider-subtitle">Descoperă programe personalizate pentru un corp sănătos și puternic – la orice vârstă, în orice etapă.</div>
 											<div class="wow-slider-buttons">
-												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">Programele Noastre <i class="fa-solid fa-plus fa-fw"></i></a>
-												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">Despre Noi <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="classes.html" class="wow-slider-btn wow-slider-btn-primary">PROGRAMELE NOASTRE <i class="fa-solid fa-plus fa-fw"></i></a>
+												<a href="about.html" class="wow-slider-btn wow-slider-btn-secondary">DESPRE NOI <i class="fa-solid fa-plus fa-fw"></i></a>
 											</div>
 										</div>
 										
@@ -1385,6 +1431,84 @@ const rippleCSS = `
 const style = document.createElement('style');
 style.textContent = rippleCSS;
 document.head.appendChild(style);
+
+// Modern Mobile Menu Animation
+document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggler = document.querySelector('.modern-mobile-menu');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    const modernHamburger = document.getElementById('modernHamburger');
+    
+    // Original mobile menu functionality
+    if (mobileMenuToggler && mobileMenu) {
+        mobileMenuToggler.addEventListener('click', function() {
+            this.classList.toggle('active');
+            
+            // Toggle menu visibility
+            if (this.classList.contains('active')) {
+                mobileMenu.classList.add('active');
+            } else {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!mobileMenuToggler.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenuToggler.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Close menu when clicking on menu items
+        const menuItems = mobileMenu.querySelectorAll('a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                mobileMenuToggler.classList.remove('active');
+                mobileMenu.classList.remove('active');
+            });
+        });
+    }
+    
+    // Modern hamburger menu functionality
+    if (modernHamburger) {
+        modernHamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            
+            // Toggle mobile menu visibility
+            if (mobileMenu) {
+                if (this.classList.contains('active')) {
+                    mobileMenu.classList.add('active');
+                } else {
+                    mobileMenu.classList.remove('active');
+                }
+            }
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!modernHamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+                modernHamburger.classList.remove('active');
+                if (mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+            }
+        });
+    }
+    
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
 </script>
 
 </body>

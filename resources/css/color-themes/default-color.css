@@ -4,8 +4,8 @@
 
 :root {
 	
-	/* #df0303 in decimal RGB */
-    --main-color: rgb(234,27,41);
-	--main-color-rgb:234,27,41;
+	/* Blue theme in decimal RGB */
+    --main-color: rgb(59,130,246);
+	--main-color-rgb:59,130,246;
 	
 }
